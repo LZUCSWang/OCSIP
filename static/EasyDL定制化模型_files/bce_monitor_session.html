@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!-- saved from url=(0068)https://console.bce.baidu.com/asset/monitor/bce_monitor_session.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Monitor Cross Domain Session</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script>
+    (function (global) {
+        /*\
+        |*|
+        |*|  :: cookies.js ::
+        |*|
+        |*|  A complete cookies reader/writer framework with full unicode support.
+        |*|
+        |*|  https://developer.mozilla.org/en-US/docs/DOM/document.cookie
+        |*|
+        |*|  This framework is released under the GNU Public License, version 3 or later.
+        |*|  http://www.gnu.org/licenses/gpl-3.0-standalone.html
+        |*|
+        |*|  Syntaxes:
+        |*|
+        |*|  * docCookies.setItem(name, value[, end[, path[, domain[, secure]]]])
+        |*|  * docCookies.getItem(name)
+        |*|  * docCookies.hasItem(name)
+        |*|
+        \*/
+
+        /* eslint-disable */
+        var docCookies = {
+            getItem: function (sKey) {
+                return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[-.+*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+            },
+            setItem: function (sKey, sValue, vEnd, sPath, sDomain, bSecure) {
+                if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) { return false; }
+                var sExpires = "";
+                if (vEnd) {
+                    switch (vEnd.constructor) {
+                        case Number:
+                        sExpires = vEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + vEnd;
+                        break;
+                        case String:
+                        sExpires = "; expires=" + vEnd;
+                        break;
+                        case Date:
+                        sExpires = "; expires=" + vEnd.toUTCString();
+                        break;
+                    }
+                }
+                var s = encodeURIComponent(sKey) + "=" + encodeURIComponent(sValue) + sExpires + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "") + (bSecure ? "; secure" : "");
+                document.cookie = s;
+                return true;
+            }
+        }
+        /* eslint-enable */
+
+        /**
+        * 用于fe-monitor库，跨域获取、设置控制台用户会话ID的文件
+        * 打通官网和控制台的用户行为采集
+        */
+        var SESSION_NAME = 'BCE_MONITOR_TRACK_SESSION_ID';
+        var rootHost = /test/.test(location.host) ? '.bcetest.baidu.com' : '.bce.baidu.com';
+        document.domain = 'baidu.com';
+
+        function getSession() {
+            return docCookies.getItem(SESSION_NAME);
+        }
+
+        function setSession(value) {
+            docCookies.setItem(SESSION_NAME, value, 3000, '/', rootHost, false);
+        }
+
+        window.addEventListener('message', function (e) {
+            switch (e.data.action) {
+                case 'getSession':
+                    window.parent.postMessage({
+                        action: 'getSession',
+                        value: getSession()
+                    }, e.origin);
+                    break;
+                case 'setSession':
+                    setSession(e.data.value);
+                    break;
+            }
+        });
+    })(window);
+
+    </script>
+</head>
+<body>
+
+
+
+</body></html>

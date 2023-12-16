@@ -1,0 +1,1997 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<script>
+    {% if messages %}
+        {% for msg in messages %}
+            console.log('消息类型：{{ msg.tags }}，消息内容：{{ msg }}');
+        {% endfor %}
+    {% endif %}
+</script>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="shortcut icon" href="https://aip.bdstatic.com/easydl/favicon.ico">
+    <meta content="utf-8" http-equiv="encoding">
+    <meta name="importmap-type" content="systemjs-importmap">
+    <title>EasyDL定制化模型</title>
+    <link rel="preload" href="../static/EasyDL定制化模型_files/system.min.js.下载" as="script">
+    <link rel="preload" href="../static/EasyDL定制化模型_files/amd.min.js.下载" as="script">
+    <link rel="preload" href="../static/EasyDL定制化模型_files/named-exports.min.js.下载" as="script">
+    <link rel="preload" href="../static/EasyDL定制化模型_files/named-register.min.js.下载" as="script">
+    <script charset="utf-8" src="../static/EasyDL定制化模型_files/UrlChangeTracker.js.下载"></script>
+    <script src="../static/EasyDL定制化模型_files/hm.js.下载"></script>
+    <script>var _hmt = window._hmt || [];
+        (function () {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8b973192450250dd85b9011320b455ba';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script>
+    <script>Object.defineProperty(window, 'SP', {
+            value: { "TICKET": "https://ticket.bce.baidu.com/#/ticket/create~productId=171", "IA_DOC.2": "https://ai.baidu.com/ai-doc/EASYDL/lk38n327g", "IA_DOC.6": "https://ai.baidu.com/ai-doc/EASYDL/Ik4xuuf9u", "IA_FAQ.2": "https://ai.baidu.com/ai-doc/EASYDL/mk38n2xke#%E6%99%BA%E8%83%BD%E6%A0%87%E6%B3%A8%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98", "IA_FAQ.6": "https://ai.baidu.com/ai-doc/EASYDL/Ik38n2yfi#%E6%99%BA%E8%83%BD%E6%A0%87%E6%B3%A8%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98", "DATASETS_API.1": "https://ai.baidu.com/ai-doc/EASYDL/qk38n31an", "DATASETS_API.2": "https://ai.baidu.com/ai-doc/EASYDL/0k38n32n7", "DATASETS_API.3": "https://ai.baidu.com/ai-doc/EASYDL/Uk38n33s9", "DATASETS_API.4": "https://ai.baidu.com/ai-doc/EASYDL/Lk522l768", "DATASETS_API.5": "https://ai.baidu.com/ai-doc/EASYDL/Ukennzz5p", "DATASETS_API.6": "https://ai.baidu.com/ai-doc/EASYDL/Sk38n35kz", "DATASETS_API.7": "https://ai.baidu.com/ai-doc/EASYDL/xkcwz0bx3", "DATASETS_API.10": "https://ai.baidu.com/ai-doc/EASYDL/4kgstvrq7", "EASYDATA_PORTAL": "https://console.bce.baidu.com/easydata", "MARKET_INTEGRETION": "https://aim.baidu.com/product/search?word=easydl%20%E8%BD%AF%E7%A1%AC%E4%B8%80%E4%BD%93", "CONSOLE_EASYDL_SERIAL": { "SDK": "https://console.bce.baidu.com/ai/#/ai/easydlLiteImage/serial/list", "INTEGRATION": "https://console.bce.baidu.com/ai/#/ai/easydlLiteImage/special/list", "PRIVATIZATION": { "VIS": "https://console.bce.baidu.com/ai/#/ai/easydlLiteImage/package/index~type=sdk", "SOUND": "https://console.bce.baidu.com/ai/#/ai/easydlLiteVoice/package/index~type=sdk", "VIDEO": "https://console.bce.baidu.com/ai/#/ai/easydlLiteVideo/package/index", "NLP": "https://console.bce.baidu.com/ai/#/ai/easydlLiteNlp/package/index" } }, "CONSOLE_EASYDL_APP": { "VIS": "https://console.bce.baidu.com/ai/#/ai/easydlLiteImage/app/list", "NLP": "https://console.bce.baidu.com/ai/#/ai/easydlLiteNlp/app/list", "SOUND": "https://console.bce.baidu.com/ai/#/ai/easydlLiteVoice/app/list", "VIDEO": "https://console.bce.baidu.com/ai/#/ai/easydlLiteVideo/app/list", "ML": "https://console.bce.baidu.com/ai/#/ai/easydlLiteStructuredData/app/list", "RETAIL": "https://console.bce.baidu.com/ai/#/ai/easydlRetail/app/list", "VQA": "https://console.bce.baidu.com/ai/#/ai/easydlLiteVqa/app/list" }, "CONSOLE_HOME": { "VIS": "https://console.bce.baidu.com/ai/#/ai/easydlLiteImage/overview/index~type=1", "NLP": "https://console.bce.baidu.com/ai/#/ai/easydlLiteNlp/overview/index~type=1", "SOUND": "https://console.bce.baidu.com/ai/#/ai/easydlLiteVoice/overview/index~type=1", "VIDEO": "https://console.bce.baidu.com/ai/#/ai/easydlLiteVideo/overview/index", "ML": "https://console.bce.baidu.com/ai/#/ai/easydlLiteStructuredData/overview/index", "RETAIL": "https://console.bce.baidu.com/ai/#/ai/easydlRetail/overview/index", "VQA": "https://console.bce.baidu.com/ai/#/ai/easydlLiteVqa/overview/index" }, "CONSOLE_MARKET_ORDER": "https://console.bce.baidu.com/ai/#/ai/market/buyer/service/list", "CONSOLE_CHARGE": { "PAY": { "VIS": "https://console.bce.baidu.com/ai/#/ai/easydlLiteImage/training/create", "NLP": "https://console.bce.baidu.com/ai/#/ai/easydlLiteNlp/training/create", "VQA": "https://console.bce.baidu.com/ai/#/ai/easydlLiteVqa/training/create", "ML": "https://console.bce.baidu.com/ai/#/ai/easydlLiteStructuredData/training/create", "SOUND": "https://console.bce.baidu.com/ai/#/ai/easydlLiteVoice/training/create", "VIDEO": "https://console.bce.baidu.com/ai/#/ai/easydlLiteVideo/training/create" }, "RECHARGE": "https://console.bce.baidu.com/finance/#/finance/account/recharge" }, "ASSIST_ANNO_DOC": "https://ai.baidu.com/ai-doc/EASYDL/wkbj2dnwl", "AUGMENTATION_MANUAL_DOC": { "1": "//ai.baidu.com/ai-doc/EASYDL/5k38n30e8#%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%BC%BA%E7%AD%96%E7%95%A5", "2": "//ai.baidu.com/ai-doc/EASYDL/nk38n32wc#%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%BC%BA%E7%AD%96%E7%95%A5" }, "DEPLOY_DOC": { "VIS": "https://ai.baidu.com/ai-doc/EASYDL/ok38n2w9h#%E4%B8%B0%E5%AF%8C%E7%9A%84%E9%83%A8%E7%BD%B2%E6%96%B9%E6%A1%88", "NLP": "https://ai.baidu.com/ai-doc/EASYDL/Akhyjuv9x#%E4%B8%B0%E5%AF%8C%E7%9A%84%E9%83%A8%E7%BD%B2%E6%96%B9%E6%A1%88" }, "API_DOC": { "IMG_CLS": "https://ai.baidu.com/ai-doc/EASYDL/Yk38n3bj1", "OBJ_DCT": "https://ai.baidu.com/ai-doc/EASYDL/3k38n3ej4", "OBJ_DCT_RECT": "https://ai.baidu.com/ai-doc/EASYDL/3k38n3ej4", "SOUND_CLS": "https://ai.baidu.com/ai-doc/EASYDL/Qk38n3f97", "TEXT_CLS": "http://ai.baidu.com/docs#/EasyDL_TEXT_API/top", "TEXT_CLS_ERNIE_DOC": "http://ai.baidu.com/docs#/EasyDL_TEXT_API/top", "TEXT_CLS_ERNIE_M": "http://ai.baidu.com/docs#/EasyDL_TEXT_API/top", "TEXT_CLS_MULTI": "https://ai.baidu.com/ai-doc/EASYDL/Kkbhm4oz3", "TEXT_NLG": "https://ai.baidu.com/ai-doc/EASYDL/il2swhrkb", "TEXT_SIM": "https://ai.baidu.com/ai-doc/EASYDL/Ekh5yyem5", "VIDEO_CLS": "https://ai.baidu.com/ai-doc/EASYDL/ek38n3fyt", "SEGMENT": "https://ai.baidu.com/ai-doc/EASYDL/Gk38n3fqb", "INSTANCE_SEGMENT": "https://ai.baidu.com/ai-doc/EASYDL/Gk38n3fqb", "SENTIMENT": "https://ai.baidu.com/ai-doc/EASYDL/tkbj5rsa6", "TEXT_ENTITY_EXTRACT": "https://ai.baidu.com/ai-doc/EASYDL/0keteam77", "ML": "https://ai.baidu.com/ai-doc/EASYDL/1kff9r20o", "RETAIL": "https://ai.baidu.com/ai-doc/EASYDL/Jk38n3gu5", "TEXT_RELATION_EXTRACT": "https://ai.baidu.com/ai-doc/EASYDL/xki8am57d", "TIME_SERIES_FORECAST": "https://ai.baidu.com/ai-doc/EASYDL/Kkkgicm7p" }, "EDGE_HOST": "https://ai.baidu.com/easyedge", "QQ": "679517246", "WEN_XIN": "https://wenxin.baidu.com/", "PLATFORM": "easydl-lite", "AI_MARKET": "https://aim.baidu.com/", "MARKET_PRODUCT": "https://aim.baidu.com/product", "MARKET_MODEL_ALG": "https://aim.baidu.com/product/search?productCategory=60005&track=cp:ainsem|pf:pc|pp:easyDL|pu:easyDL|ci:|kw:10001285", "MARKET_EDGEBOARD": "https://aim.baidu.com/product/search?word=easydl%20edgeboard&productTag=40009&track=cp:ainsem|pf:pc|pp:easyDL|pu:easyDL|ci:|kw:10001285", "MARKET_JETSON": "https://aim.baidu.com/product/search?word=easydl%20jetson", "MARKET_EBVPU": "https://aim.baidu.com/product/3e1f397f-77ec-4f7f-846b-25e39d694f4f?track=cp:ainsem|pf:pc|pp:easyDL|pu:easyDL|ci:|kw:10001285", "MARKET_SHOP_INFO": "https://console.bce.baidu.com/ai/#/ai/market/shop/info", "MARKET_SHOP_REGISTER": "https://console.bce.baidu.com/ai/#/ai/market/provider/register~from=easyDL", "MARKET_PUBLISH": "https://console.bce.baidu.com/ai/#/ai/market/product/publish", "MARKET_PRODUCT_LIST": "https://console.bce.baidu.com/ai/#/ai/market/product/list", "MARKET_ORDER_LIST": "https://console.bce.baidu.com/ai/#/ai/market/order/list", "LABEL_EXAMPLE_DOC": { "IMG_CLS": "https://ai.baidu.com/ai-doc/EASYDL/5k38n30e8#%E6%B7%BB%E5%8A%A0%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AE", "OBJ_DCT": "https://ai.baidu.com/ai-doc/EASYDL/nk38n32wc#%E6%B7%BB%E5%8A%A0%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AE", "OBJ_DCT_RECT": "https://ai.baidu.com/ai-doc/EASYDL/nk38n32wc#%E6%B7%BB%E5%8A%A0%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AE" }, "SERVICE_ACC_DOC": "https://ai.baidu.com/ai-doc/EASYDL/Sk38n39os#%E5%8A%A0%E9%80%9F%E7%89%88sdk", "CONFUSION_HEAT_MAP_DOC": "https://ai.baidu.com/ai-doc/EASYDL/Ak38n30uk#%E5%88%86%E6%9E%90%E7%83%AD%E5%8A%9B%E5%9B%BE", "IA_DOC": "https://ai.baidu.com/ai-doc/EasyData/rk9jovuv4", "NLP_IA_DOC": "https://ai.baidu.com/ai-doc/EasyData/wkhlt9v6v", "JS_SDK_DOC": { "1": "https://ai.baidu.com/ai-doc/EASYDL/8l39rbhq8", "2": "https://ai.baidu.com/ai-doc/EASYDL/Gl39rebrx" } },
+            configurable: false,
+            writable: false
+        });
+        Object.freeze(window.SP);
+
+
+        Object.defineProperty(window, 'codename', {
+            value: { "imgcls": ["1-100"], "objdct": ["2-200", "2-201"], "soundcls": ["3-300"], "textcls": ["4-400", "4-406", "4-407"], "textclsm": ["4-401"], "videocls": ["5-500"], "segment": ["6-600", "6-601"], "textsim": ["7-700"], "sentiment": ["9-900"], "tee": ["10-1000"], "tre": ["11-1100"], "videotracking": ["12-1200"], "textnlg": ["18-1800"], "comment": ["19-1900"], "ml": ["201-20100"], "tsf": ["202-20200"], "retail": ["1001-10010", "1002-10020"], "imgtext": ["2001-20010"] },
+            configurable: false,
+            writable: false
+        });
+        Object.freeze(window.codename);</script>
+    <link href="../static/EasyDL定制化模型_files/tzui.css" rel="stylesheet">
+    <link href="../static/EasyDL定制化模型_files/All.css" rel="stylesheet">
+    <link href="../static/EasyDL定制化模型_files/app.caf8f498.css" rel="stylesheet">
+    <script
+        type="systemjs-importmap">{"imports":{"//aip-static.cdn.bcebos.com/afe/easydl-lite/latest/js/chunk-vendors.237adaeb.js":"//aip-static.cdn.bcebos.com/afe/easydl-lite/latest/js/chunk-vendors.237adaeb.js","//aip-static.cdn.bcebos.com/afe/easydl-lite/latest/js/app.7400c2a4.js":"//aip-static.cdn.bcebos.com/afe/easydl-lite/latest/js/app.7400c2a4.js","@baidu/afe-navbar-easydl":"//aip-static.cdn.bcebos.com/afe/@baidu/afe-navbar-easydl/8eb0551ef49d6f541087ab7bb7703128/app.js","@baidu/afe-navbar-wenxin":"//aip-static.cdn.bcebos.com/afe/@baidu/afe-navbar-wenxin/cdf700db54659b2b27335e3c6fef6f0d/app.js","@baidu/afe-app-annotate":"//aip-static.cdn.bcebos.com/afe/@baidu/afe-app-annotate/267159d71cf5562b8c83955dbb9d5706/app.js","@baidu/afe-app-model":"//aip-static.cdn.bcebos.com/afe/@baidu/afe-app-model/49cac6e7554e19ea73047a0cf19a660e/app.js","@baidu/afe-app-deploy":"//aip-static.cdn.bcebos.com/afe/@baidu/afe-app-deploy/7faf272a04a97e01203f6752eabd1eef/app.js","@baidu/afe-app-report":"//aip-static.cdn.bcebos.com/afe/@baidu/afe-app-report/af9146ab6b7feda6f9d0fe6577058898/app.js","@baidu/afe-app-validate":"//aip-static.cdn.bcebos.com/afe/@baidu/afe-app-validate/75b77e2ae10495cefabec309594ed8c8/app.js","@baidu/afe-app-dataset":"//aip-static.cdn.bcebos.com/afe/@baidu/afe-app-dataset/3629ee18e181f668cd8915932f5a33ad/app.js","@baidu/afe-app-mulan":"//aip-static.cdn.bcebos.com/afe/@baidu/afe-app-mulan/da764a10a13a34e3575cd1b685f0df71/app.js","@baidu/afe-app-bie":"//aip-static.cdn.bcebos.com/afe/@baidu/afe-app-bie/d908df804158ada2e18f0b6122448ad5/app.js","@baidu/afe-app-etl":"//aip-static.cdn.bcebos.com/afe/@baidu/afe-app-etl/77a44790335d2fbe51c068608ab0e60a/app.js","@baidu/afe-app-dcl":"//aip-static.cdn.bcebos.com/afe/@baidu/afe-app-dcl/ab16d275be66abbcd7684797c07ab566/app.js","@baidu/afe-app-label":"//aip-static.cdn.bcebos.com/afe/@baidu/afe-app-label/51d66176ae222887c7eb1fe400d60720/app.js","@baidu/afe-app-camera":"//aip-static.cdn.bcebos.com/afe/@baidu/afe-app-camera/22f3798e91c8b5466dc8010aa33dfa86/app.js","@baidu/afe-app-retail-annotate":"//aip-static.cdn.bcebos.com/afe/@baidu/afe-app-retail-annotate/58bb342cc0f203d4e275be08e0e279b4/app.js","@baidu/afe-app-retail-model":"//aip-static.cdn.bcebos.com/afe/@baidu/afe-app-retail-model/2de679e36113ed2e009a4bdb48415850/app.js","@baidu/afe-app-retail-validate":"//aip-static.cdn.bcebos.com/afe/@baidu/afe-app-retail-validate/28d94b4829096f1f104f34ff5cfd5a27/app.js","@baidu/afe-app-retail-deploy":"//aip-static.cdn.bcebos.com/afe/@baidu/afe-app-retail-deploy/8b5d04cab4095398069f0d4f65f368fe/app.js","@baidu/afe-app-retail-vas":"//aip-static.cdn.bcebos.com/afe/@baidu/afe-app-retail-vas/110ca2c356ac71c7bbaf3d15b47375e2/app.js","@baidu/afe-app-retail-dataset":"//aip-static.cdn.bcebos.com/afe/@baidu/afe-app-retail-dataset/16459401b66b953a48d779ee24a0db28/app.js","@baidu/afe-app-aug":"//aip-static.cdn.bcebos.com/afe/@baidu/afe-app-aug/d9e21e5d53ea07504b25112cbf2fdf98/app.js","vue":"//aip-static.cdn.bcebos.com/afe/vue/2.6.14/dist/vue.runtime.min.js","vuex":"//aip-static.cdn.bcebos.com/afe/vuex/3.6.2/dist/vuex.min.js","@vue/composition-api":"//aip-static.cdn.bcebos.com/afe/@vue/composition-api/1.0.2/dist/vue-composition-api.prod.js","vue-router":"//aip-static.cdn.bcebos.com/afe/vue-router/3.5.4/dist/vue-router.min.js","@baidu/tianzhi-ui":"//aip-static.cdn.bcebos.com/afe/@baidu/tianzhi-ui/5.0.13/dist/tzui.umd.min.js","@baidu/ergo-ui-vue2":"//aip-static.cdn.bcebos.com/afe/@baidu/ergo-ui-vue2/1.0.29/dist/index.js","@baidu/afe-easycom":"//aip-static.cdn.bcebos.com/afe/@baidu/afe-easycom/1.0.48/dist/easycom.umd.js","@baidu/afe-i18n":"//aip-static.cdn.bcebos.com/afe/@baidu/afe-i18n/2.0.1/dist/i18n.umd.js","@baidu/afe-utils":"//aip-static.cdn.bcebos.com/afe/@baidu/afe-utils/2.0.26/dist/utils.umd.js","@baidu/afe-request":"//aip-static.cdn.bcebos.com/afe/@baidu/afe-request/2.2.8/dist/request.umd.js","@baidu/tianzhi.afe-route-enhancement":"//aip-static.cdn.bcebos.com/afe/@baidu/tianzhi.afe-route-enhancement/0.0.4/dist/index.js","@baidu/data-share":"//aip-static.cdn.bcebos.com/afe/@baidu/data-share/1.0.43/dist/DataShare.js"}}</script>
+    <script src="../static/EasyDL定制化模型_files/system.min.js.下载"></script>
+    <script src="../static/EasyDL定制化模型_files/amd.min.js.下载"></script>
+    <script src="../static/EasyDL定制化模型_files/named-exports.min.js.下载"></script>
+    <script src="../static/EasyDL定制化模型_files/named-register.min.js.下载"></script>
+    <link rel="stylesheet" href="../static/EasyDL定制化模型_files/easy.css">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+
+</head>
+
+<body>
+    {% comment %} <div data-v-77e9b1ec="" class="wh-right">
+        <div data-v-77e9b1ec="" class="portal-wh-right vue-portal-target"></div>
+        <div data-v-77e9b1ec="" class="portal-top-right vue-portal-target">
+            <!----><span data-v-59643587="" class="right-bar">
+                <a data-v-59643587="" href="https://ai.baidu.com/easydl/app/dataset/6/600,601/271231/import"
+                    class="ctl-item"><button data-v-59643587="" type="button" class="hollow s-button">
+                        <!----><span class="s-button__txt"> 导入 </span>
+                    </button></a>
+                <!-- <button data-v-59643587="" type="button" class="s-button" style="margin-left: 20px">
+                    <span class="s-button__txt"> 数据标注 </span> -->
+                </button>
+            </span>
+        </div>
+    </div> {% endcomment %}
+
+    {% comment %} <div data-v-77e9b1ec="" class="wh-right">
+        <div data-v-77e9b1ec="" class="portal-wh-right vue-portal-target"></div>
+        <div data-v-77e9b1ec="" class="portal-top-right vue-portal-target">
+            <span data-v-59643587="" class="right-bar">
+                <!-- 使用 input 标签创建文件上传表单 -->
+                <form method="post" action="{% url 'add' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <label for="file-upload" class="hollow s-button">
+                        <span class="s-button__txt"> 导入 </span>
+                    </label>
+                    <input id="file-upload" type="file" name="file" style="display: none;" onchange="submitForm()">
+                </form>
+            </span>
+        </div>
+    </div>
+
+    <script>
+        // 显示文件选择框
+        function submitForm() {
+            document.querySelector('#file-upload').click();
+        }
+    </script> {% endcomment %}
+    <form method="post" enctype="multipart/form-data" action="{% url 'add' %}">
+        {% csrf_token %}
+        <div class="form-group">
+             <label for="icon_input">图像</label>
+             <input name="img" type="file" id="icon_input">
+         </div>
+         <button type="submit" class="btn btn-success btn-block">提交</button>
+     </form>
+    <div data-v-77e9b1ec="" class="wh-append vue-portal-target">
+    </div>
+
+
+    <main data-v-8cbb3d0a="" data-v-18394423="" class="workspace">
+        <div data-v-8cbb3d0a="" class="workspace-main">
+            <div data-v-8cbb3d0a="" class="afe-app-dataset">
+                <div data-v-40858c7d="" class="page-dataset-entities" data-v-8cbb3d0a="" style="position: relative">
+                    <div id="loading-directive-wrapper" style="
+                                position: absolute;
+                                inset: 0px;
+                                z-index: -1000;
+                                opacity: 0;
+                                text-align: center;
+                                background-color: rgb(255, 255, 255);
+                                transition: all 0.3s ease 0s;
+                              ">
+                        <div data-v-afde520c="" class="eg-hexagon-loading">
+                            <div data-v-afde520c="" class="eg-hexagon-loading-context eg-hexagon-bottom --l">
+                                <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"
+                                    class="eg-hexagon-begin eg-hexagon-default">
+                                    <g fill="inherit">
+                                        <circle cx="511.1" cy="108.6" r="102.6" class="circle1"></circle>
+                                        <circle cx="862.1" cy="309.6" r="102.6" class="circle2"></circle>
+                                        <circle cx="862.1" cy="712.4" r="102.6" class="circle3"></circle>
+                                        <circle cx="511.1" cy="917.8" r="102.6" class="circle4"></circle>
+                                        <circle cx="159.7" cy="712.4" r="102.6" class="circle5"></circle>
+                                        <circle cx="159.7" cy="309.6" r="102.6" class="circle6"></circle>
+                                    </g>
+                                    <polygon
+                                        points="511.1,108.6 861.8,311.2 862.1,712.4 511.1,917.8 159.7,712.4 146,309.6"
+                                        fill="none" stroke-width="50" stroke-miterlimit="10" stroke="inherit"
+                                        class="frame">
+                                    </polygon>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-v-40858c7d="" class="v-portal" style="display: none"></div>
+                    <div data-v-59643587="" data-v-40858c7d="" class="page-dataset-entities-image --lite">
+                        <div data-v-59643587="" class="flex-wrap">
+                            <div data-v-59643587="" class="content-wrap">
+                                <div data-v-59643587="" class="tab-control">
+                                    <div data-v-59643587="" class="entity-tab s-tab-group">
+                                        <div data-v-59643587="" class="s-tab active"> 全部 (675) </div>
+                                        <div data-v-59643587="" class="s-tab"> CC </div>
+                                        <div data-v-59643587="" class="s-tab"> EC </div>
+                                        <div data-v-59643587="" class="s-tab"> HGSC </div>
+                                        <div data-v-59643587="" class="s-tab"> LGSC </div>
+                                        <div data-v-59643587="" class="s-tab"> MC </div>
+
+                                        <div class="indicator" style=" width: 80px;transform: translateX(0px);"></div>
+                                    </div>
+                                </div>
+                                <div data-v-377bc79f="" data-v-59643587="" class="filter-row">
+                                    <div data-v-377bc79f="" class="filter-bar">
+                                        <!---->
+                                        <div class="s-tip">
+                                            <div class="inner-wrap">
+                                                <span>筛选</span>
+                                                <i class="tzfont s-icon tzfont-down-arrow s-icon-down-arrow"></i>
+                                            </div>
+                                            <div class="s-tip_popper" style="
+                                            position: absolute;
+                                            inset: 0px auto auto 0px;
+                                            margin: 0px;
+                                            transform: translate3d(
+                                              224px,
+                                              232.8px,
+                                              0px
+                                            );
+                                            display: none;
+                                          " data-popper-placement="bottom-start">
+                                                <div class="s-tip_popper_arrow" style="
+                                              position: absolute;
+                                              left: 0px;
+                                              transform: translate3d(0px, 0px, 0px);
+                                            "></div>
+                                                <div class="s-tip_popper_content">
+                                                    <div class="popper-wrap">
+                                                        <div data-v-31f6f16e="" class="filter-item">
+                                                            <div data-v-31f6f16e="" class="label"> 数据来源 </div>
+                                                            <div data-v-31f6f16e="" class="content">
+                                                                <div data-v-31f6f16e="" class="s-checkbox checked">
+                                                                    <input type="checkbox" tabindex="-1"
+                                                                        class="s-checkbox_input" value="true" />
+                                                                    <div class="s-checkbox_inner">
+                                                                        <i
+                                                                            class="tzfont s-icon tzfont-check s-icon-check"></i>
+                                                                        <div class="s-checkbox_inner-square"
+                                                                            style="display: none"></div>
+                                                                    </div> 不限
+                                                                </div>
+                                                                <div data-v-31f6f16e=""
+                                                                    class="s-checkbox-group content-item">
+                                                                    <form class="s-form">
+                                                                        <span>
+                                                                            <div data-v-31f6f16e="" class="s-checkbox">
+                                                                                <input type="checkbox" tabindex="-1"
+                                                                                    class="s-checkbox_input"
+                                                                                    value="false" />
+                                                                                <div class="s-checkbox_inner">
+                                                                                    <i class="tzfont s-icon tzfont-check s-icon-check"
+                                                                                        style="display: none"></i>
+                                                                                    <div class="s-checkbox_inner-square"
+                                                                                        style="display: none"></div>
+                                                                                </div> 本地上传
+                                                                            </div>
+                                                                            <div data-v-31f6f16e="" class="s-checkbox">
+                                                                                <input type="checkbox" tabindex="-1"
+                                                                                    class="s-checkbox_input"
+                                                                                    value="false" />
+                                                                                <div class="s-checkbox_inner">
+                                                                                    <i class="tzfont s-icon tzfont-check s-icon-check"
+                                                                                        style="display: none"></i>
+                                                                                    <div class="s-checkbox_inner-square"
+                                                                                        style="display: none"></div>
+                                                                                </div> 摄像头采集
+                                                                            </div>
+                                                                            <div data-v-31f6f16e="" class="s-checkbox">
+                                                                                <input type="checkbox" tabindex="-1"
+                                                                                    class="s-checkbox_input"
+                                                                                    value="false" />
+                                                                                <div class="s-checkbox_inner">
+                                                                                    <i class="tzfont s-icon tzfont-check s-icon-check"
+                                                                                        style="display: none"></i>
+                                                                                    <div class="s-checkbox_inner-square"
+                                                                                        style="display: none"></div>
+                                                                                </div> 云服务调用数据采集
+                                                                            </div>
+                                                                            <div data-v-31f6f16e="" class="s-checkbox">
+                                                                                <input type="checkbox" tabindex="-1"
+                                                                                    class="s-checkbox_input"
+                                                                                    value="false" />
+                                                                                <div class="s-checkbox_inner">
+                                                                                    <i class="tzfont s-icon tzfont-check s-icon-check"
+                                                                                        style="display: none"></i>
+                                                                                    <div class="s-checkbox_inner-square"
+                                                                                        style="display: none"></div>
+                                                                                </div> 数据清洗
+                                                                            </div>
+                                                                            <div data-v-31f6f16e="" class="s-checkbox">
+                                                                                <input type="checkbox" tabindex="-1"
+                                                                                    class="s-checkbox_input"
+                                                                                    value="false" />
+                                                                                <div class="s-checkbox_inner">
+                                                                                    <i class="tzfont s-icon tzfont-check s-icon-check"
+                                                                                        style="display: none"></i>
+                                                                                    <div class="s-checkbox_inner-square"
+                                                                                        style="display: none"></div>
+                                                                                </div> 数据增强
+                                                                            </div>
+                                                                        </span>
+                                                                    </form>
+                                                                </div>
+                                                                <!---->
+                                                                <!---->
+                                                            </div>
+                                                        </div>
+                                                        <div data-v-31f6f16e="" class="filter-item">
+                                                            <div data-v-31f6f16e="" class="label"> 导入日期 </div>
+                                                            <div data-v-31f6f16e="" class="content">
+                                                                <div data-v-31f6f16e="" class="s-checkbox checked">
+                                                                    <input type="checkbox" tabindex="-1"
+                                                                        class="s-checkbox_input" value="true" />
+                                                                    <div class="s-checkbox_inner">
+                                                                        <i
+                                                                            class="tzfont s-icon tzfont-check s-icon-check"></i>
+                                                                        <div class="s-checkbox_inner-square"
+                                                                            style="display: none"></div>
+                                                                    </div> 不限
+                                                                </div>
+                                                                <div data-v-31f6f16e=""
+                                                                    class="content-item s-date gray">
+                                                                    <div class="s-date_label"> 2023-11-11 - 2023-12-11
+                                                                        <i
+                                                                            class="s-date_icon tzfont s-icon tzfont-date s-icon-date"></i>
+                                                                    </div>
+                                                                    <div class="s-date_picker" style="
+                                                        display: none;
+                                                        position: absolute;
+                                                        inset: 0px auto auto 0px;
+                                                        margin: 0px;
+                                                        transform: translate3d(
+                                                          0px,
+                                                          0px,
+                                                          0px
+                                                        );
+                                                      " data-popper-placement="bottom-start"
+                                                                        data-popper-reference-hidden=""
+                                                                        data-popper-escaped="">
+                                                                        <div class="s-date_body s-daterange_body">
+                                                                            <div class="s-date_rangepicker">
+                                                                                <!---->
+                                                                                <div class="s-date_rangepicker_panel">
+                                                                                    <div
+                                                                                        class="s-date_rangepicker_left">
+                                                                                        <div class="s-date_toolbar">
+                                                                                            <div
+                                                                                                class="s-date_toolbar_icon s-date_toolbar_iconleft s-date_toolbar_iconleft_double">
+                                                                                                <i
+                                                                                                    class="tzfont s-icon tzfont-arrow-double-left s-icon-arrow-double-left"></i>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="s-date_toolbar_icon s-date_toolbar_iconleft">
+                                                                                                <i
+                                                                                                    class="tzfont s-icon tzfont-arrow-left-3 s-icon-arrow-left-3"></i>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="s-date_toolbar_title">
+                                                                                                <span>2023年</span>
+                                                                                                <span>11月</span>
+                                                                                            </div>
+                                                                                            <!---->
+                                                                                            <!---->
+                                                                                        </div>
+                                                                                        <div class="s-date_panel">
+                                                                                            <div
+                                                                                                class="s-date_panel_title">
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    一 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    二 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    三 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    四 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    五 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    六 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    日 </div>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="s-date_panel_items">
+                                                                                                <div
+                                                                                                    class="s-date_panel_item diffmonth">
+                                                                                                    30 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item diffmonth">
+                                                                                                    31 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    1 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    2 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    3 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    4 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    5 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    6 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    7 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    8 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    9 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    10 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item actived">
+                                                                                                    11 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    12 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    13 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    14 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    15 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    16 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    17 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    18 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    19 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    20 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    21 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    22 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    23 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    24 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    25 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    26 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    27 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    28 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    29 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    30 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item diffmonth">
+                                                                                                    1 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item diffmonth">
+                                                                                                    2 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item diffmonth">
+                                                                                                    3 </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <!---->
+                                                                                        <!---->
+                                                                                    </div>
+                                                                                    <div
+                                                                                        class="s-date_rangepicker_right">
+                                                                                        <div class="s-date_toolbar">
+                                                                                            <!---->
+                                                                                            <!---->
+                                                                                            <div
+                                                                                                class="s-date_toolbar_title">
+                                                                                                <span>2023年</span>
+                                                                                                <span>12月</span>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="s-date_toolbar_icon s-date_toolbar_iconright">
+                                                                                                <i
+                                                                                                    class="tzfont s-icon tzfont-arrow-right-3 s-icon-arrow-right-3"></i>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="s-date_toolbar_icon s-date_toolbar_iconright s-date_toolbar_iconright_double">
+                                                                                                <i
+                                                                                                    class="tzfont s-icon tzfont-arrow-double-right s-icon-arrow-double-right"></i>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="s-date_panel">
+                                                                                            <div
+                                                                                                class="s-date_panel_title">
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    一 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    二 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    三 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    四 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    五 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    六 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    日 </div>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="s-date_panel_items">
+                                                                                                <div
+                                                                                                    class="s-date_panel_item diffmonth">
+                                                                                                    27 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item diffmonth">
+                                                                                                    28 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item diffmonth">
+                                                                                                    29 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item diffmonth">
+                                                                                                    30 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    1 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    2 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    3 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    4 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    5 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    6 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    7 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    8 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    9 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    10 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item actived range today">
+                                                                                                    11 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    12 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    13 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    14 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    15 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    16 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    17 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    18 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    19 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    20 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    21 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    22 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    23 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    24 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    25 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    26 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    27 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    28 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    29 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    30 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    31 </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <!---->
+                                                                                        <!---->
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!---->
+                                                                <!---->
+                                                            </div>
+                                                        </div>
+                                                        <div data-v-31f6f16e="" class="filter-item">
+                                                            <div data-v-31f6f16e="" class="label"> 标注日期 </div>
+                                                            <div data-v-31f6f16e="" class="content">
+                                                                <div data-v-31f6f16e="" class="s-checkbox checked">
+                                                                    <input type="checkbox" tabindex="-1"
+                                                                        class="s-checkbox_input" value="true" />
+                                                                    <div class="s-checkbox_inner">
+                                                                        <i
+                                                                            class="tzfont s-icon tzfont-check s-icon-check"></i>
+                                                                        <div class="s-checkbox_inner-square"
+                                                                            style="display: none"></div>
+                                                                    </div> 不限
+                                                                </div>
+                                                                <div data-v-31f6f16e=""
+                                                                    class="content-item s-date gray">
+                                                                    <div class="s-date_label"> 2023-11-11 - 2023-12-11
+                                                                        <i
+                                                                            class="s-date_icon tzfont s-icon tzfont-date s-icon-date"></i>
+                                                                    </div>
+                                                                    <div class="s-date_picker" style="
+                                                        display: none;
+                                                        position: absolute;
+                                                        inset: 0px auto auto 0px;
+                                                        margin: 0px;
+                                                        transform: translate3d(
+                                                          0px,
+                                                          0px,
+                                                          0px
+                                                        );
+                                                      " data-popper-placement="bottom-start"
+                                                                        data-popper-reference-hidden=""
+                                                                        data-popper-escaped="">
+                                                                        <div class="s-date_body s-daterange_body">
+                                                                            <div class="s-date_rangepicker">
+                                                                                <!---->
+                                                                                <div class="s-date_rangepicker_panel">
+                                                                                    <div
+                                                                                        class="s-date_rangepicker_left">
+                                                                                        <div class="s-date_toolbar">
+                                                                                            <div
+                                                                                                class="s-date_toolbar_icon s-date_toolbar_iconleft s-date_toolbar_iconleft_double">
+                                                                                                <i
+                                                                                                    class="tzfont s-icon tzfont-arrow-double-left s-icon-arrow-double-left"></i>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="s-date_toolbar_icon s-date_toolbar_iconleft">
+                                                                                                <i
+                                                                                                    class="tzfont s-icon tzfont-arrow-left-3 s-icon-arrow-left-3"></i>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="s-date_toolbar_title">
+                                                                                                <span>2023年</span>
+                                                                                                <span>11月</span>
+                                                                                            </div>
+                                                                                            <!---->
+                                                                                            <!---->
+                                                                                        </div>
+                                                                                        <div class="s-date_panel">
+                                                                                            <div
+                                                                                                class="s-date_panel_title">
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    一 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    二 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    三 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    四 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    五 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    六 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    日 </div>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="s-date_panel_items">
+                                                                                                <div
+                                                                                                    class="s-date_panel_item diffmonth">
+                                                                                                    30 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item diffmonth">
+                                                                                                    31 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    1 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    2 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    3 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    4 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    5 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    6 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    7 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    8 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    9 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    10 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item actived">
+                                                                                                    11 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    12 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    13 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    14 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    15 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    16 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    17 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    18 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    19 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    20 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    21 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    22 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    23 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    24 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    25 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    26 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    27 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    28 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    29 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    30 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item diffmonth">
+                                                                                                    1 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item diffmonth">
+                                                                                                    2 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item diffmonth">
+                                                                                                    3 </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <!---->
+                                                                                        <!---->
+                                                                                    </div>
+                                                                                    <div
+                                                                                        class="s-date_rangepicker_right">
+                                                                                        <div class="s-date_toolbar">
+                                                                                            <!---->
+                                                                                            <!---->
+                                                                                            <div
+                                                                                                class="s-date_toolbar_title">
+                                                                                                <span>2023年</span>
+                                                                                                <span>12月</span>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="s-date_toolbar_icon s-date_toolbar_iconright">
+                                                                                                <i
+                                                                                                    class="tzfont s-icon tzfont-arrow-right-3 s-icon-arrow-right-3"></i>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="s-date_toolbar_icon s-date_toolbar_iconright s-date_toolbar_iconright_double">
+                                                                                                <i
+                                                                                                    class="tzfont s-icon tzfont-arrow-double-right s-icon-arrow-double-right"></i>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="s-date_panel">
+                                                                                            <div
+                                                                                                class="s-date_panel_title">
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    一 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    二 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    三 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    四 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    五 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    六 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item">
+                                                                                                    日 </div>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="s-date_panel_items">
+                                                                                                <div
+                                                                                                    class="s-date_panel_item diffmonth">
+                                                                                                    27 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item diffmonth">
+                                                                                                    28 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item diffmonth">
+                                                                                                    29 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item diffmonth">
+                                                                                                    30 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    1 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    2 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    3 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    4 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    5 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    6 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    7 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    8 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    9 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item range">
+                                                                                                    10 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item actived range today">
+                                                                                                    11 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    12 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    13 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    14 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    15 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    16 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    17 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    18 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    19 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    20 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    21 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    22 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    23 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    24 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    25 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    26 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    27 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    28 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    29 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    30 </div>
+                                                                                                <div
+                                                                                                    class="s-date_panel_item future disabled">
+                                                                                                    31 </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <!---->
+                                                                                        <!---->
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!---->
+                                                                <!---->
+                                                            </div>
+                                                        </div>
+                                                        <div data-v-31f6f16e="" class="filter-item">
+                                                            <div data-v-31f6f16e="" class="label"> 标签 </div>
+                                                            <div data-v-31f6f16e="" class="content">
+                                                                <div data-v-31f6f16e="" class="s-checkbox checked">
+                                                                    <input type="checkbox" tabindex="-1"
+                                                                        class="s-checkbox_input" value="true" />
+                                                                    <div class="s-checkbox_inner">
+                                                                        <i
+                                                                            class="tzfont s-icon tzfont-check s-icon-check"></i>
+                                                                        <div class="s-checkbox_inner-square"
+                                                                            style="display: none"></div>
+                                                                    </div> 不限
+                                                                </div>
+                                                                <div data-v-31f6f16e=""
+                                                                    class="content-item dropdown-item s-dropdown">
+                                                                    <div title="请选择" class="s-dropdown-item label">
+                                                                        <div class="label_left"> 请选择 </div>
+                                                                        <div class="arrow">
+                                                                            <i
+                                                                                class="tzfont s-icon tzfont-down-arrow s-icon-down-arrow"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <ul class="s-dropdown_ul" style="
+                                                        display: none;
+                                                        position: absolute;
+                                                        inset: 0px auto auto 0px;
+                                                        margin: 0px;
+                                                        transform: translate3d(
+                                                          0px,
+                                                          0px,
+                                                          0px
+                                                        );
+                                                      " data-popper-placement="bottom-start"
+                                                                        data-popper-reference-hidden=""
+                                                                        data-popper-escaped="">
+                                                                        <!---->
+                                                                        <li data-v-31f6f16e="" class="s-dropdown-item"
+                                                                            title="住宅"> 住宅 </li>
+                                                                        <li data-v-31f6f16e="" class="s-dropdown-item"
+                                                                            title="院子"> 院子 </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <!---->
+                                                                <!---->
+                                                            </div>
+                                                        </div>
+                                                        <div class="btn-wrap">
+                                                            <button type="button" class="s-button">
+                                                                <!---->
+                                                                <span class="s-button__txt">完成</span>
+                                                            </button>
+                                                            <button type="button" class="secondary s-button">
+                                                                <!---->
+                                                                <span class="s-button__txt">取消</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!---->
+                                    </div>
+                                </div>
+                                <div data-v-59643587="" class="entity-flex-wrap">
+                                    <div data-v-59643587="" class="entity-label-wrap">
+                                        <div data-v-4434a285="" data-v-59643587="" class="label-picker">
+                                            <div data-v-53400bd8="" data-v-4434a285=""
+                                                class="label-picker-dataset-head">
+                                                <div data-v-53400bd8="" class="label-title"> 标签栏 </div>
+                                                <div data-v-53400bd8="" class="label-picker-dataset-opts">
+                                                    <button data-v-53400bd8="" type="button"
+                                                        class="label-picker-dataset-opts_add s-button">
+                                                        <!---->
+                                                        <span class="s-button__txt">添加标签</span>
+                                                    </button>
+                                                    <div data-v-53400bd8=""
+                                                        class="label-picker-dataset-opts_more s-tip">
+                                                        <button data-v-53400bd8="" type="button"
+                                                            class="label-picker-dataset-opts_more_btn s-button">
+                                                            <!---->
+                                                            <span class="s-button__txt">
+                                                                <img data-v-53400bd8=""
+                                                                    src="../static/EasyDL定制化模型_files/arrow.min.28cd15ce.svg"
+                                                                    class="arrow-down-img" />
+                                                            </span>
+                                                        </button>
+                                                        <div class="s-tip_popper" style="
+                                                  display: none;
+                                                  position: absolute;
+                                                  inset: 0px 0px auto auto;
+                                                  margin: 0px;
+                                                  transform: translate3d(
+                                                    0px,
+                                                    32px,
+                                                    0px
+                                                  );
+                                                " data-popper-placement="bottom-end">
+                                                            <div class="s-tip_popper_arrow" style="
+                                                    position: absolute;
+                                                    left: 0px;
+                                                    transform: translate3d(
+                                                      0px,
+                                                      0px,
+                                                      0px
+                                                    );
+                                                  "></div>
+                                                            <div class="s-tip_popper_content">
+                                                                <div data-v-53400bd8="" class="add-group"> 添加标签组 </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div data-v-2c9e9409="" data-v-4434a285="" class="label-picker-searcher">
+                                                <span data-v-2c9e9409="" class="s-input-wrapper searcher-input">
+                                                    <!---->
+                                                    <input placeholder="请输入标签名称" type="text"
+                                                        class="s-input s-input--single" />
+                                                    <span class="s-input-postfix">
+                                                        <i data-v-2c9e9409=""
+                                                            class="search-icon tzfont s-icon tzfont-search s-icon-search"></i>
+                                                    </span>
+                                                </span>
+                                                <!---->
+                                            </div>
+                                            <div data-v-f2a8c58e="" data-v-4434a285=""
+                                                class="label-picker-dataset_items"
+                                                labellist="[object Object],[object Object]">
+                                                <div data-v-f2a8c58e=""
+                                                    class="label-picker_items_head items_head_withcolor">
+                                                    <!---->
+                                                    <span data-v-f2a8c58e=""
+                                                        class="label-head-title label-name-title">标签名</span>
+                                                    <span data-v-f2a8c58e="" class="label-head-title label-count-title">
+                                                        数据量
+                                                        <img data-v-f2a8c58e=""
+                                                            src="../static/EasyDL定制化模型_files/asc.d407a4c0.svg" alt="" />
+                                                    </span>
+                                                </div>
+                                                <div data-v-f2a8c58e="" class="label-picker_items_content">
+                                                    <div data-v-f2a8c58e="" class="label-picker-dataset_item">
+                                                        <!---->
+                                                        <div data-v-c4e4ebee="" data-v-f2a8c58e=""
+                                                            class="label-picker-dataset_item label-picker_item_content label-picker-dataset_item_optvisible">
+                                                            <!---->
+                                                            <!---->
+                                                            <div data-v-567a0da4="" data-v-c4e4ebee="" title="住宅"
+                                                                class="label-picker-name">
+                                                                <div data-v-567a0da4="" class="color-block" style="
+                                                      background: rgb(26, 115, 232);
+                                                    "></div>
+                                                                <div data-v-567a0da4=""
+                                                                    class="label-picker-name_txt label-picker-name_txt_withcolor">
+                                                                    住宅 </div>
+                                                                <div data-v-567a0da4="" class="label-picker-name_op">
+                                                                    <i data-v-567a0da4=""
+                                                                        class="label-opt tzfont s-icon tzfont-edit s-icon-edit"></i>
+                                                                </div>
+                                                            </div>
+                                                            <div data-v-282fa3d8="" data-v-c4e4ebee=""
+                                                                class="label-picker-opts label-picker_opts_hide">
+                                                                <!---->
+                                                                <!---->
+                                                                <div data-v-282fa3d8=""
+                                                                    class="label-opt label-opt-more s-tip">
+                                                                    <svg data-v-282fa3d8="" viewBox="0 0 18 4"
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                        version="1.1" xml:space="preserve"
+                                                                        focusable="false" style="
+                                                        fill: currentcolor;
+                                                        width: 1em;
+                                                        height: 1em;
+                                                        display: inline-block;
+                                                        user-select: none;
+                                                      ">
+                                                                        <g fill-rule="evenodd">
+                                                                            <circle cx="2" cy="2" r="2"></circle>
+                                                                            <circle cx="9" cy="2" r="2"></circle>
+                                                                            <circle cx="16" cy="2" r="2"></circle>
+                                                                        </g>
+                                                                    </svg>
+                                                                    <div class="s-tip_popper" style="
+                                                        display: none;
+                                                        position: fixed;
+                                                        inset: 0px auto auto 0px;
+                                                        margin: 0px;
+                                                        transform: translate3d(
+                                                          502.4px,
+                                                          459.2px,
+                                                          0px
+                                                        );
+                                                      " data-popper-placement="bottom">
+                                                                        <div class="s-tip_popper_arrow" style="
+                                                          position: absolute;
+                                                          left: 0px;
+                                                          transform: translate3d(
+                                                            0px,
+                                                            0px,
+                                                            0px
+                                                          );
+                                                        "></div>
+                                                                        <div class="s-tip_popper_content">
+                                                                            <div data-v-282fa3d8=""
+                                                                                class="label-opt-more-btn">
+                                                                                <div data-v-282fa3d8=""
+                                                                                    templatetype="600"
+                                                                                    class="label-opt-more-btn-item">
+                                                                                    <svg viewBox="0 0 16 16"
+                                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                                        version="1.1"
+                                                                                        xml:space="preserve"
+                                                                                        focusable="false"
+                                                                                        class="opt-svg" style="
+                                                                fill: currentcolor;
+                                                                width: 1em;
+                                                                height: 1em;
+                                                                display: inline-block;
+                                                                user-select: none;
+                                                              ">
+                                                                                        <path fill-rule="nonzero"
+                                                                                            d="M8 2L2.806 7.003 3.824 8.01l3.447-3.438L7.3 16h1.4L8.694 4.572l3.353 3.373.996-1.007L8 2zm8-.6V0H0v1.4h16z">
+                                                                                        </path>
+                                                                                    </svg>
+                                                                                    <span class="opt-txt"> 置顶</span>
+                                                                                </div>
+                                                                                <div data-v-282fa3d8=""
+                                                                                    class="label-opt-more-btn-item">
+                                                                                    <svg viewBox="0 0 16 16"
+                                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                                        version="1.1"
+                                                                                        xml:space="preserve"
+                                                                                        focusable="false"
+                                                                                        class="opt-svg" style="
+                                                                fill: currentcolor;
+                                                                width: 1em;
+                                                                height: 1em;
+                                                                display: inline-block;
+                                                                user-select: none;
+                                                              ">
+                                                                                        <path fill-rule="evenodd"
+                                                                                            d="M2 4H1V3h14v1h-1v11H2V4zm5 3v5H6V7h1zm3 0v5H9V7h1zm0-6v1H6V1h4zm3 13V4H3v10h10z">
+                                                                                        </path>
+                                                                                    </svg>
+                                                                                    <span class="opt-txt">删除</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!---->
+                                                            </div>
+                                                            <div data-v-c4e4ebee="" class="label-count"> 670 </div>
+                                                            <!---->
+                                                        </div>
+                                                    </div>
+                                                    <div data-v-f2a8c58e="" class="label-picker-dataset_item">
+                                                        <!---->
+                                                        <div data-v-c4e4ebee="" data-v-f2a8c58e=""
+                                                            class="label-picker-dataset_item label-picker_item_content label-picker-dataset_item_optvisible">
+                                                            <!---->
+                                                            <!---->
+                                                            <div data-v-567a0da4="" data-v-c4e4ebee="" title="院子"
+                                                                class="label-picker-name">
+                                                                <div data-v-567a0da4="" class="color-block" style="
+                                                      background: rgb(26, 115, 232);
+                                                    "></div>
+                                                                <div data-v-567a0da4=""
+                                                                    class="label-picker-name_txt label-picker-name_txt_withcolor">
+                                                                    院子 </div>
+                                                                <div data-v-567a0da4="" class="label-picker-name_op">
+                                                                    <i data-v-567a0da4=""
+                                                                        class="label-opt tzfont s-icon tzfont-edit s-icon-edit"></i>
+                                                                </div>
+                                                            </div>
+                                                            <div data-v-282fa3d8="" data-v-c4e4ebee=""
+                                                                class="label-picker-opts label-picker_opts_hide">
+                                                                <!---->
+                                                                <!---->
+                                                                <div data-v-282fa3d8=""
+                                                                    class="label-opt label-opt-more s-tip">
+                                                                    <svg data-v-282fa3d8="" viewBox="0 0 18 4"
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                        version="1.1" xml:space="preserve"
+                                                                        focusable="false" style="
+                                                        fill: currentcolor;
+                                                        width: 1em;
+                                                        height: 1em;
+                                                        display: inline-block;
+                                                        user-select: none;
+                                                      ">
+                                                                        <g fill-rule="evenodd">
+                                                                            <circle cx="2" cy="2" r="2"></circle>
+                                                                            <circle cx="9" cy="2" r="2"></circle>
+                                                                            <circle cx="16" cy="2" r="2"></circle>
+                                                                        </g>
+                                                                    </svg>
+                                                                    <div class="s-tip_popper" style="
+                                                        display: none;
+                                                        position: fixed;
+                                                        inset: 0px auto auto 0px;
+                                                        margin: 0px;
+                                                        transform: translate3d(
+                                                          502.4px,
+                                                          511.2px,
+                                                          0px
+                                                        );
+                                                      " data-popper-placement="bottom">
+                                                                        <div class="s-tip_popper_arrow" style="
+                                                          position: absolute;
+                                                          left: 0px;
+                                                          transform: translate3d(
+                                                            0px,
+                                                            0px,
+                                                            0px
+                                                          );
+                                                        "></div>
+                                                                        <div class="s-tip_popper_content">
+                                                                            <div data-v-282fa3d8=""
+                                                                                class="label-opt-more-btn">
+                                                                                <div data-v-282fa3d8=""
+                                                                                    templatetype="600"
+                                                                                    class="label-opt-more-btn-item">
+                                                                                    <svg viewBox="0 0 16 16"
+                                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                                        version="1.1"
+                                                                                        xml:space="preserve"
+                                                                                        focusable="false"
+                                                                                        class="opt-svg" style="
+                                                                fill: currentcolor;
+                                                                width: 1em;
+                                                                height: 1em;
+                                                                display: inline-block;
+                                                                user-select: none;
+                                                              ">
+                                                                                        <path fill-rule="nonzero"
+                                                                                            d="M8 2L2.806 7.003 3.824 8.01l3.447-3.438L7.3 16h1.4L8.694 4.572l3.353 3.373.996-1.007L8 2zm8-.6V0H0v1.4h16z">
+                                                                                        </path>
+                                                                                    </svg>
+                                                                                    <span class="opt-txt"> 置顶</span>
+                                                                                </div>
+                                                                                <div data-v-282fa3d8=""
+                                                                                    class="label-opt-more-btn-item">
+                                                                                    <svg viewBox="0 0 16 16"
+                                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                                        version="1.1"
+                                                                                        xml:space="preserve"
+                                                                                        focusable="false"
+                                                                                        class="opt-svg" style="
+                                                                fill: currentcolor;
+                                                                width: 1em;
+                                                                height: 1em;
+                                                                display: inline-block;
+                                                                user-select: none;
+                                                              ">
+                                                                                        <path fill-rule="evenodd"
+                                                                                            d="M2 4H1V3h14v1h-1v11H2V4zm5 3v5H6V7h1zm3 0v5H9V7h1zm0-6v1H6V1h4zm3 13V4H3v10h10z">
+                                                                                        </path>
+                                                                                    </svg>
+                                                                                    <span class="opt-txt">删除</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!---->
+                                                            </div>
+                                                            <div data-v-c4e4ebee="" class="label-count"> 513 </div>
+                                                            <!---->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-v-59643587="" class="entity-wrap">
+                                        <!---->
+                                        <span data-v-17f429e7="" data-v-59643587="" class="delete-item">
+                                            <button data-v-17f429e7="" disabled="disabled" type="button"
+                                                class="eg-button --m --default">
+                                                <!----> 删除
+                                            </button>
+                                            <div data-v-17f429e7="" class="item s-checkbox">
+                                                <input type="checkbox" tabindex="-1" class="s-checkbox_input"
+                                                    value="false" />
+                                                <div class="s-checkbox_inner">
+                                                    <i class="tzfont s-icon tzfont-check s-icon-check"
+                                                        style="display: none"></i>
+                                                    <div class="s-checkbox_inner-square" style="display: none"></div>
+                                                </div> 选择本页
+                                            </div>
+                                            <!---->
+                                        </span>
+                                        <div data-v-6776f756="" data-v-59643587="" class="entity-list">
+                                            <div data-v-2f896e97="" data-v-6776f756="" class="entity-item">
+                                                <div data-v-2f896e97="" class="img-wrap">
+                                                    <div data-v-7e8a7a54="" data-v-2f896e97=""
+                                                        class="common-entity-item"
+                                                        labels="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]"
+                                                        readonly="readonly" nopreview="true" templatetype="600"
+                                                        angle="0">
+                                                        <img src="{% static 'data/pictures/test.png' %}" alt="Dataset Image" width="200" height="200">
+                                                        {% comment %} 这只是一个显示图片的例子，需要从dataset字典中获取path {% endcomment %}
+                                                        <div data-v-c009cab8="" data-v-7e8a7a54=""
+                                                            class="img-new-annotator img-previewer" nopreview="true"
+                                                            angle="0">
+                                                            <div data-v-6da74332="" data-v-c009cab8=""
+                                                                class="vis-annotator g-image">
+                                                                <div data-v-6da74332="" class="vis-annotator_editor"
+                                                                    data-src="https://bj.bcebos.com/aipe-dragonboat/raw_677368ef1939764eb98d71aed54265d9e9622b674f0545894645a2588e0e22a2?authorization=bce-auth-v1%2F50c8bb753dcb4e1d8646bb1ffefd3503%2F2023-12-11T08%3A33%3A52Z%2F7200%2F%2F4d720530bf567d60c7b66fcd21029727c33bd6ab9bac4effef46372dcb47233c"
+                                                                    tabindex="0">
+                                                                    <div class="tz-annotator" style="
+                                                        position: relative;
+                                                        width: 100%;
+                                                        height: 100%;
+                                                        outline: none;
+                                                      ">
+                                                                        <!--bg-->
+                                                                        <canvas width="217" height="217" style="
+                                                          position: absolute;
+                                                          top: 0px;
+                                                          left: 0px;
+                                                          width: 100%;
+                                                          height: 100%;
+                                                        "></canvas>
+                                                                        <!--cold-->
+                                                                        <canvas width="108" height="108" style="
+                                                          position: absolute;
+                                                          top: 0px;
+                                                          left: 0px;
+                                                          width: 100%;
+                                                          height: 100%;
+                                                        "></canvas>
+                                                                        <canvas width="108" height="108" style="
+                                                          position: absolute;
+                                                          top: 0px;
+                                                          left: 0px;
+                                                          width: 100%;
+                                                          height: 100%;
+                                                        "></canvas>
+                                                                        <canvas width="108" height="108" style="
+                                                          position: absolute;
+                                                          top: 0px;
+                                                          left: 0px;
+                                                          width: 100%;
+                                                          height: 100%;
+                                                        "></canvas>
+                                                                        <canvas width="108" height="108" style="
+                                                          position: absolute;
+                                                          top: 0px;
+                                                          left: 0px;
+                                                          width: 100%;
+                                                          height: 100%;
+                                                        "></canvas>
+                                                                        <canvas width="108" height="108" style="
+                                                          position: absolute;
+                                                          top: 0px;
+                                                          left: 0px;
+                                                          width: 100%;
+                                                          height: 100%;
+                                                        "></canvas>
+                                                                        <!--hot-->
+                                                                        <canvas width="108" height="108" style="
+                                                          position: absolute;
+                                                          top: 0px;
+                                                          left: 0px;
+                                                          width: 100%;
+                                                          height: 100%;
+                                                        "></canvas>
+                                                                        <canvas width="108" height="108" style="
+                                                          position: absolute;
+                                                          top: 0px;
+                                                          left: 0px;
+                                                          width: 100%;
+                                                          height: 100%;
+                                                        "></canvas>
+                                                                        <canvas width="108" height="108" style="
+                                                          position: absolute;
+                                                          top: 0px;
+                                                          left: 0px;
+                                                          width: 100%;
+                                                          height: 100%;
+                                                        "></canvas>
+                                                                        <canvas width="108" height="108" style="
+                                                          position: absolute;
+                                                          top: 0px;
+                                                          left: 0px;
+                                                          width: 100%;
+                                                          height: 100%;
+                                                        "></canvas>
+                                                                        <canvas width="108" height="108" style="
+                                                          position: absolute;
+                                                          top: 0px;
+                                                          left: 0px;
+                                                          width: 100%;
+                                                          height: 100%;
+                                                        "></canvas>
+                                                                        <!--instant-->
+                                                                        <canvas width="108" height="108" style="
+                                                          position: absolute;
+                                                          top: 0px;
+                                                          left: 0px;
+                                                          width: 100%;
+                                                          height: 100%;
+                                                        "></canvas>
+                                                                        <canvas width="108" height="108" style="
+                                                          position: absolute;
+                                                          top: 0px;
+                                                          left: 0px;
+                                                          width: 100%;
+                                                          height: 100%;
+                                                        "></canvas>
+                                                                        <canvas width="108" height="108" style="
+                                                          position: absolute;
+                                                          top: 0px;
+                                                          left: 0px;
+                                                          width: 100%;
+                                                          height: 100%;
+                                                        "></canvas>
+                                                                        <canvas width="108" height="108" style="
+                                                          position: absolute;
+                                                          top: 0px;
+                                                          left: 0px;
+                                                          width: 100%;
+                                                          height: 100%;
+                                                        "></canvas>
+                                                                        <canvas width="108" height="108" style="
+                                                          position: absolute;
+                                                          top: 0px;
+                                                          left: 0px;
+                                                          width: 100%;
+                                                          height: 100%;
+                                                        "></canvas>
+                                                                    </div>
+                                                                </div>
+                                                                <div data-v-6da74332=""
+                                                                    class="vis-annotator_loading-mask"
+                                                                    style="display: none"> 图片载入中…… </div>
+                                                            </div>
+                                                            <!---->
+                                                            <!---->
+                                                            <!---->
+                                                            <!---->
+                                                            <!---->
+                                                            <!---->
+                                                            <!---->
+                                                            <!---->
+                                                            <!---->
+                                                        </div>
+                                                    </div>
+                                                    <div data-v-2f896e97="" class="img-cb s-checkbox">
+                                                        <input type="checkbox" tabindex="-1" class="s-checkbox_input"
+                                                            value="false" />
+                                                        <div class="s-checkbox_inner">
+                                                            <i class="tzfont s-icon tzfont-check s-icon-check"
+                                                                style="display: none"></i>
+                                                            <div class="s-checkbox_inner-square" style="display: none">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div data-v-2f896e97="" class="img-cover">
+                                                        <!-- <img src="./img/9200.png" alt="图片"> -->
+                                                    </div>
+                                                    <!---->
+                                                </div>
+                                                <div data-v-2f896e97="" class="ctl-bar">
+                                                    <div data-v-2f896e97="" class="label-tip s-tip">
+                                                        <div data-v-2f896e97="" class="content-wrap">
+                                                            <div data-v-2f896e97="" class="content-main">
+                                                                <span data-v-2f896e97="" class="label-content">住宅</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="s-tip_popper" style="
+                                                  display: none;
+                                                  position: absolute;
+                                                  inset: 0px auto auto 0px;
+                                                  margin: 0px;
+                                                  transform: translate3d(
+                                                    601.6px,
+                                                    -1289.6px,
+                                                    0px
+                                                  );
+                                                " data-popper-placement="bottom-start" data-popper-reference-hidden=""
+                                                            data-popper-escaped="">
+                                                            <div class="s-tip_popper_arrow" style="
+                                                    position: absolute;
+                                                    left: 0px;
+                                                    transform: translate3d(
+                                                      0px,
+                                                      0px,
+                                                      0px
+                                                    );
+                                                  "></div>
+                                                            <div class="s-tip_popper_content">
+                                                                <div data-v-2f896e97="" class="label-list">
+                                                                    <div data-v-2f896e97="" title="住宅"
+                                                                        class="label-item">
+                                                                        住宅 </div>
+                                                                    <div data-v-2f896e97="" title="院子"
+                                                                        class="label-item">
+                                                                        院子 </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div data-v-2f896e97="" class="ctl-wrap">
+                                                        <div data-v-2f896e97="" class="edit-tip s-tip">
+                                                            <a data-v-2f896e97=""
+                                                                href="https://ai.baidu.com/easydl/app/annotate/6/600,601/handwork?datasetId=271231&amp;type=ALL&amp;entityId=677368ef1939764eb98d71aed54265d9e9622b674f0545894645a2588e0e22a2&amp;entityIndex=0&amp;paramFilters=%7B%22datasetId%22%3A271231,%22source%22%3A%5B%5D,%22importTime%22%3A%5B%5D,%22annoTime%22%3A%5B%5D,%22tabType%22%3A0,%22labelId%22%3A%22%22,%22relationId%22%3A%22%22,%22labelName%22%3A%22%22,%22labelStatus%22%3A%5B%5D%7D&amp;filterLabels=%5B%5D&amp;breadcrumb=%255B%257B%2522name%2522%253A%2522%25E6%2588%2591%25E7%259A%2584%25E6%2595%25B0%25E6%258D%25AE%25E6%2580%25BB%25E8%25A7%2588%2522%252C%2522to%2522%253A%2522%252Fdataset%252F6%252F600%252C601%252Flist%2522%257D%252C%257B%2522name%2522%253A%2522%25E6%2595%25B0%25E6%258D%25AE%25E9%259B%2586%25E8%25AF%25A6%25E6%2583%2585%25EF%25BC%2588%25E6%259C%2589%25E6%2588%25BF%25E5%25B1%258B%252FV3%25EF%25BC%2589%2522%252C%2522to%2522%253A%2522%252Fdataset%252Fsegment%252F271231%252Fentities%253FpageFilters%253D%25257B%252522offset%252522%25253A0%252C%252522pageSize%252522%25253A30%25257D%2526paramFilters%253D%25257B%252522datasetId%252522%25253A271231%252C%252522source%252522%25253A%25255B%25255D%252C%252522importTime%252522%25253A%25255B%25255D%252C%252522annoTime%252522%25253A%25255B%25255D%252C%252522tabType%252522%25253A0%252C%252522labelId%252522%25253A%252522%252522%252C%252522relationId%252522%25253A%252522%252522%252C%252522labelName%252522%25253A%252522%252522%252C%252522labelStatus%252522%25253A%25255B%25255D%25257D%2522%257D%252C%257B%2522name%2522%253A%2522%25E6%25A0%2587%25E6%25B3%25A8%2522%257D%255D"
+                                                                class="icon edit"></a>
+                                                            <div class="s-tip_popper" style="
+                                                    position: absolute;
+                                                    inset: 0px auto auto 0px;
+                                                    margin: 0px;
+                                                    transform: translate3d(
+                                                      696.8px,
+                                                      -1301.6px,
+                                                      0px
+                                                    );
+                                                    display: none;
+                                                  " data-popper-placement="bottom" data-popper-reference-hidden=""
+                                                                data-popper-escaped="">
+                                                                <div class="s-tip_popper_arrow" style="
+                                                      position: absolute;
+                                                      left: 0px;
+                                                      transform: translate3d(
+                                                        0px,
+                                                        0px,
+                                                        0px
+                                                      );
+                                                    "></div>
+                                                                <div class="s-tip_popper_content">
+                                                                    <div data-v-2f896e97="" class="edit-popper">
+                                                                        点击【编辑icon】即可进入“单张图片标注模式” </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div data-v-2f896e97="" class="edit-preview s-tip">
+                                                            <span data-v-2f896e97="" class="icon open"></span>
+                                                            <div class="s-tip_popper" style="
+                                                    position: absolute;
+                                                    inset: 0px auto auto 0px;
+                                                    margin: 0px;
+                                                    transform: translate3d(
+                                                      723.2px,
+                                                      -1301.6px,
+                                                      0px
+                                                    );
+                                                    display: none;
+                                                  " data-popper-placement="bottom" data-popper-reference-hidden=""
+                                                                data-popper-escaped="">
+                                                                <div class="s-tip_popper_arrow" style="
+                                                      position: absolute;
+                                                      left: 0px;
+                                                      transform: translate3d(
+                                                        0px,
+                                                        0px,
+                                                        0px
+                                                      );
+                                                    "></div>
+                                                                <div class="s-tip_popper_content">
+                                                                    <div data-v-2f896e97="" class="edit-popper"> 查看大图
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div data-v-2f896e97="" data-v-6776f756="" class="entity-item">
+                                                <div data-v-2f896e97="" class="img-wrap">
+                                                    <div data-v-7e8a7a54="" data-v-2f896e97=""
+                                                        class="common-entity-item"
+                                                        src="https://bj.bcebos.com/aipe-dragonboat/raw_9da8821eb2fccde873b666eac6da67db8b890c9f076fdb93fe6c06ee44f8054a?authorization=bce-auth-v1%2F50c8bb753dcb4e1d8646bb1ffefd3503%2F2023-12-11T08%3A33%3A52Z%2F7200%2F%2F9038e93df29d7fe739e1f0c14a2e90b53a1fdd395fbcc82d24a56a55e5e4d942"
+                                                        labels="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]"
+                                                        readonly="readonly" nopreview="true" templatetype="600"
+                                                        angle="0">
+                                                        <div data-v-c009cab8="" data-v-7e8a7a54=""
+                                                            class="img-new-annotator img-previewer" nopreview="true"
+                                                            angle="0">
+                                                            <div data-v-6da74332="" data-v-c009cab8=""
+                                                                class="vis-annotator g-image">
+                                                                <div data-v-6da74332="" class="vis-annotator_editor"
+                                                                    data-src="https://bj.bcebos.com/aipe-dragonboat/raw_9da8821eb2fccde873b666eac6da67db8b890c9f076fdb93fe6c06ee44f8054a?authorization=bce-auth-v1%2F50c8bb753dcb4e1d8646bb1ffefd3503%2F2023-12-11T08%3A33%3A52Z%2F7200%2F%2F9038e93df29d7fe739e1f0c14a2e90b53a1fdd395fbcc82d24a56a55e5e4d942"
+                                                                    tabindex="0">
+                                                                    <div class="tz-annotator" style="
+                                                        position: relative;
+                                                        width: 100%;
+                                                        height: 100%;
+                                                        outline: none;
+                                                      ">
+                                                                        <!--bg-->
+                                                                        <canvas width="217" height="217" style="
+                                                          position: absolute;
+                                                          top: 0px;
+                                                          left: 0px;
+                                                          width: 100%;
+                                                          height: 100%;
+                                                        "></canvas>
+                                                                        <!--cold-->
+                                                                        <canvas width="108" height="108" style="
+                                                          position: absolute;
+                                                          top: 0px;
+                                                          left: 0px;
+                                                          width: 100%;
+                                                          height: 100%;
+                                                        "></canvas>
+                                                                        <canvas width="108" height="108" style="
+                                                          position: absolute;
+                                                          top: 0px;
+                                                          left: 0px;
+                                                          width: 100%;
+                                                          height: 100%;
+                                                        "></canvas>
+                                                                        <canvas width="108" height="108" style="
+                                                          position: absolute;
+                                                          top: 0px;
+                                                          left: 0px;
+                                                          width: 100%;
+                                                          height: 100%;
+                                                        "></canvas>
+                                                                        <canvas width="108" height="108" style="
+                                                          position: absolute;
+                                                          top: 0px;
+                                                          left: 0px;
+                                                          width: 100%;
+                                                          height: 100%;
+                                                        "></canvas>
+                                                                        <canvas width="108" height="108" style="
+                                                          position: absolute;
+                                                          top: 0px;
+                                                          left: 0px;
+                                                          width: 100%;
+                                                          height: 100%;
+                                                        "></canvas>
+                                                                        <!--hot-->
+                                                                        <canvas width="108" height="108" style="
+                                                          position: absolute;
+                                                          top: 0px;
+                                                          left: 0px;
+                                                          width: 100%;
+                                                          height: 100%;
+                                                        "></canvas>
+                                                                        <canvas width="108" height="108" style="
+                                                          position: absolute;
+                                                          top: 0px;
+                                                          left: 0px;
+                                                          width: 100%;
+                                                          height: 100%;
+                                                        "></canvas>
+                                                                        <canvas width="108" height="108" style="
+                                                          position: absolute;
+                                                          top: 0px;
+                                                          left: 0px;
+                                                          width: 100%;
+                                                          height: 100%;
+                                                        "></canvas>
+                                                                        <canvas width="108" height="108" style="
+                                                          position: absolute;
+                                                          top: 0px;
+                                                          left: 0px;
+                                                          width: 100%;
+                                                          height: 100%;
+                                                        "></canvas>
+                                                                        <canvas width="108" height="108" style="
+                                                          position: absolute;
+                                                          top: 0px;
+                                                          left: 0px;
+                                                          width: 100%;
+                                                          height: 100%;
+                                                        "></canvas>
+                                                                        <!--instant-->
+                                                                        <canvas width="108" height="108" style="
+                                                          position: absolute;
+                                                          top: 0px;
+                                                          left: 0px;
+                                                          width: 100%;
+                                                          height: 100%;
+                                                        "></canvas>
+                                                                        <canvas width="108" height="108" style="
+                                                          position: absolute;
+                                                          top: 0px;
+                                                          left: 0px;
+                                                          width: 100%;
+                                                          height: 100%;
+                                                        "></canvas>
+                                                                        <canvas width="108" height="108" style="
+                                                          position: absolute;
+                                                          top: 0px;
+                                                          left: 0px;
+                                                          width: 100%;
+                                                          height: 100%;
+                                                        "></canvas>
+                                                                        <canvas width="108" height="108" style="
+                                                          position: absolute;
+                                                          top: 0px;
+                                                          left: 0px;
+                                                          width: 100%;
+                                                          height: 100%;
+                                                        "></canvas>
+                                                                        <canvas width="108" height="108" style="
+                                                          position: absolute;
+                                                          top: 0px;
+                                                          left: 0px;
+                                                          width: 100%;
+                                                          height: 100%;
+                                                        "></canvas>
+                                                                    </div>
+                                                                </div>
+                                                                <div data-v-6da74332=""
+                                                                    class="vis-annotator_loading-mask"
+                                                                    style="display: none"> 图片载入中…… </div>
+                                                            </div>
+                                                            <!---->
+                                                            <!---->
+                                                            <!---->
+                                                            <!---->
+                                                            <!---->
+                                                            <!---->
+                                                            <!---->
+                                                            <!---->
+                                                            <!---->
+                                                        </div>
+                                                    </div>
+                                                    <div data-v-2f896e97="" class="img-cb s-checkbox">
+                                                        <input type="checkbox" tabindex="-1" class="s-checkbox_input"
+                                                            value="false" />
+                                                        <div class="s-checkbox_inner">
+                                                            <i class="tzfont s-icon tzfont-check s-icon-check"
+                                                                style="display: none"></i>
+                                                            <div class="s-checkbox_inner-square" style="display: none">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div data-v-2f896e97="" class="img-cover">
+                                                        <!---->
+                                                    </div>
+                                                    <!---->
+                                                </div>
+                                                <div data-v-2f896e97="" class="ctl-bar">
+                                                    <div data-v-2f896e97="" class="label-tip s-tip">
+                                                        <div data-v-2f896e97="" class="content-wrap">
+                                                            <div data-v-2f896e97="" class="content-main">
+                                                                <span data-v-2f896e97="" class="label-content">住宅</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="s-tip_popper" style="
+                                                  display: none;
+                                                  position: absolute;
+                                                  inset: auto auto 0px 0px;
+                                                  margin: 0px;
+                                                  transform: translate3d(
+                                                    601.6px,
+                                                    3239.2px,
+                                                    0px
+                                                  );
+                                                " data-popper-placement="top-start" data-popper-reference-hidden=""
+                                                            data-popper-escaped="">
+                                                            <div class="s-tip_popper_arrow" style="
+                                                    position: absolute;
+                                                    left: 0px;
+                                                    transform: translate3d(
+                                                      0px,
+                                                      0px,
+                                                      0px
+                                                    );
+                                                  "></div>
+                                                            <div class="s-tip_popper_content">
+                                                                <div data-v-2f896e97="" class="label-list">
+                                                                    <div data-v-2f896e97="" title="住宅"
+                                                                        class="label-item">
+                                                                        住宅 </div>
+                                                                    <div data-v-2f896e97="" title="院子"
+                                                                        class="label-item">
+                                                                        院子 </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div data-v-2f896e97="" class="ctl-wrap">
+                                                        <div data-v-2f896e97="" class="edit-tip s-tip">
+                                                            <a data-v-2f896e97=""
+                                                                href="https://ai.baidu.com/easydl/app/annotate/6/600,601/handwork?datasetId=271231&amp;type=ALL&amp;entityId=9da8821eb2fccde873b666eac6da67db8b890c9f076fdb93fe6c06ee44f8054a&amp;entityIndex=29&amp;paramFilters=%7B%22datasetId%22%3A271231,%22source%22%3A%5B%5D,%22importTime%22%3A%5B%5D,%22annoTime%22%3A%5B%5D,%22tabType%22%3A0,%22labelId%22%3A%22%22,%22relationId%22%3A%22%22,%22labelName%22%3A%22%22,%22labelStatus%22%3A%5B%5D%7D&amp;filterLabels=%5B%5D&amp;breadcrumb=%255B%257B%2522name%2522%253A%2522%25E6%2588%2591%25E7%259A%2584%25E6%2595%25B0%25E6%258D%25AE%25E6%2580%25BB%25E8%25A7%2588%2522%252C%2522to%2522%253A%2522%252Fdataset%252F6%252F600%252C601%252Flist%2522%257D%252C%257B%2522name%2522%253A%2522%25E6%2595%25B0%25E6%258D%25AE%25E9%259B%2586%25E8%25AF%25A6%25E6%2583%2585%25EF%25BC%2588%25E6%259C%2589%25E6%2588%25BF%25E5%25B1%258B%252FV3%25EF%25BC%2589%2522%252C%2522to%2522%253A%2522%252Fdataset%252Fsegment%252F271231%252Fentities%253FpageFilters%253D%25257B%252522offset%252522%25253A0%252C%252522pageSize%252522%25253A30%25257D%2526paramFilters%253D%25257B%252522datasetId%252522%25253A271231%252C%252522source%252522%25253A%25255B%25255D%252C%252522importTime%252522%25253A%25255B%25255D%252C%252522annoTime%252522%25253A%25255B%25255D%252C%252522tabType%252522%25253A0%252C%252522labelId%252522%25253A%252522%252522%252C%252522relationId%252522%25253A%252522%252522%252C%252522labelName%252522%25253A%252522%252522%252C%252522labelStatus%252522%25253A%25255B%25255D%25257D%2522%257D%252C%257B%2522name%2522%253A%2522%25E6%25A0%2587%25E6%25B3%25A8%2522%257D%255D"
+                                                                class="icon edit"></a>
+                                                            <div class="s-tip_popper" style="
+                                                    display: none;
+                                                    position: absolute;
+                                                    inset: auto auto 0px 0px;
+                                                    margin: 0px;
+                                                    transform: translate3d(
+                                                      696.8px,
+                                                      3251.2px,
+                                                      0px
+                                                    );
+                                                  " data-popper-placement="top" data-popper-reference-hidden=""
+                                                                data-popper-escaped="">
+                                                                <div class="s-tip_popper_arrow" style="
+                                                      position: absolute;
+                                                      left: 0px;
+                                                      transform: translate3d(
+                                                        0px,
+                                                        0px,
+                                                        0px
+                                                      );
+                                                    "></div>
+                                                                <div class="s-tip_popper_content">
+                                                                    <div data-v-2f896e97="" class="edit-popper">
+                                                                        点击【编辑icon】即可进入“单张图片标注模式” </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div data-v-2f896e97="" class="edit-preview s-tip">
+                                                            <span data-v-2f896e97="" class="icon open"></span>
+                                                            <div class="s-tip_popper" style="
+                                                    display: none;
+                                                    position: absolute;
+                                                    inset: auto auto 0px 0px;
+                                                    margin: 0px;
+                                                    transform: translate3d(
+                                                      723.2px,
+                                                      3251.2px,
+                                                      0px
+                                                    );
+                                                  " data-popper-placement="top" data-popper-reference-hidden=""
+                                                                data-popper-escaped="">
+                                                                <div class="s-tip_popper_arrow" style="
+                                                      position: absolute;
+                                                      left: 0px;
+                                                      transform: translate3d(
+                                                        0px,
+                                                        0px,
+                                                        0px
+                                                      );
+                                                    "></div>
+                                                                <div class="s-tip_popper_content">
+                                                                    <div data-v-2f896e97="" class="edit-popper"> 查看大图
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div data-v-59643587="" class="page-wrap">
+                                            <div data-v-59643587="" class="s-paginator entities-pager">
+                                                <span class="label">每页显示</span>
+                                                <div class="s-dropdown">
+                                                    <div title=" 30 " class="s-dropdown-item label">
+                                                        <div class="label_left">30</div>
+                                                        <div class="arrow">
+                                                            <i
+                                                                class="tzfont s-icon tzfont-down-arrow s-icon-down-arrow"></i>
+                                                        </div>
+                                                    </div>
+                                                    <ul class="s-dropdown_ul" style="
+                                                display: none;
+                                                position: absolute;
+                                                inset: auto auto 0px 0px;
+                                                margin: 0px;
+                                                transform: translate3d(
+                                                  711.2px,
+                                                  3306.4px,
+                                                  0px
+                                                );
+                                              " data-popper-placement="top-start" data-popper-escaped=""
+                                                        data-popper-reference-hidden="">
+                                                        <!---->
+                                                        <li class="s-dropdown-item">15</li>
+                                                        <li class="s-dropdown-item highlighted"> 30 </li>
+                                                        <li class="s-dropdown-item">45</li>
+                                                    </ul>
+                                                </div>
+                                                <ul class="s-paginator_ul">
+                                                    <li class="s-paginator_li disabled">
+                                                        <i
+                                                            class="tzfont s-icon tzfont-arrow-left s-icon-arrow-left"></i>
+                                                    </li>
+                                                    <li class="s-paginator_li num active"> 1 </li>
+                                                    <li class="s-paginator_li num">2</li>
+                                                    <li class="s-paginator_li num ignored"> ••• </li>
+                                                    <li class="s-paginator_li num">23</li>
+                                                    <li class="s-paginator_li">
+                                                        <i
+                                                            class="tzfont s-icon tzfont-arrow-right s-icon-arrow-right"></i>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!---->
+                        </div>
+                        <div data-v-59643587="" class="v-portal" style="display: none"></div>
+                        <div data-v-59643587="" class="v-portal" style="display: none"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

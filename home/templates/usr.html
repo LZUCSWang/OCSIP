@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Token and Dataset Form</title>
+  </head>
+  <body>
+    <h1>Token and Dataset Form Page</h1>
+
+    <div>
+      <strong>Your Token:</strong>
+      <!-- 使用 Django 模板语言显示 token -->
+      <div>{{ token }}</div>
+      <strong>Your Username:</strong>
+      <!-- 使用 Django 模板语言显示 username -->
+      <div>{{ username }}</div>
+
+      <!-- 表单 -->
+      <form method="post" action="{% url 'creat_dataset' %}">
+        {% csrf_token %}
+
+        <!-- 输入框，用于输入 dataset_name -->
+        <label for="dataset_name">Dataset Name:</label>
+        <input type="text" id="dataset_name" name="dataset_name" required />
+        <!-- 提交按钮 -->
+        <button type="submit">Creat Dateset</button>
+        <!-- 数据集列表 -->
+        <h2>Your Datasets:</h2>
+        <ul>
+          {% for dataset_id, dataset_info in datasets.items %}
+          <li>
+            <strong>Dataset ID:</strong> {{ dataset_id }}<br />
+            <strong>Name:</strong> {{ dataset_info.name }}<br />
+            <strong>Created Time:</strong> {{ dataset_info.created_time }}<br />
+            <strong>Updated Time:</strong> {{ dataset_info.updated_time }}<br />
+
+            <!-- 使用表单提交 dataset_id -->
+            <form method="post" action="{% url 'home' %}">
+              {% csrf_token %}
+              <input type="hidden" name="dataset_id" value="{{ dataset_id }}" />
+              <button type="submit">Open Dataset</button>
+            </form>
+          </li>
+          {% endfor %}
+        </ul>
+      </form>
+    </div>
+  </body>
+</html>

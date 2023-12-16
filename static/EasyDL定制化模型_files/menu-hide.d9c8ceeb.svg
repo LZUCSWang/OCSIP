@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="10px" viewBox="0 0 12 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>图标</title>
+    <defs>
+        <path d="M0,1 L12,1 L12,0 L0,0 L0,1 Z M4,4 L12,4 L12,3 L4,3 L4,4 Z M4,7 L12,7 L12,6 L4,6 L4,7 Z M0,10 L12,10 L12,9 L0,9 L0,10 Z M0.0081,7.0003 L2.4711,4.9993 L0.0081,2.9993 L0.0081,7.0003 Z" id="path-1"></path>
+    </defs>
+    <g id="控件" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="导航/侧边导航/AI样本库/默认" transform="translate(-18.000000, -665.000000)">
+            <g id="展开" transform="translate(0.000000, 650.000000)">
+                <g id="状态" transform="translate(16.000000, 9.000000)">
+                    <g id="图标" transform="translate(8.000000, 11.000000) scale(-1, 1) translate(-8.000000, -11.000000) translate(2.000000, 6.000000)">
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <use id="图标-填色" fill="#151B26" xlink:href="#path-1"></use>
+                        <g id="Styles/Color/gray" mask="url(#mask-2)" fill="#151B26">
+                            <g transform="translate(-2.000000, -3.000000)" id="Rectangle-1">
+                                <rect x="0" y="0" width="16" height="16"></rect>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
