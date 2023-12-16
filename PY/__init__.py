@@ -267,11 +267,11 @@ def delete_dataset(token: str, dataset_id: str) -> bool:
     account = token2account[token]
     conn = sqlite3.connect('db.sqlite3')
     c = conn.cursor()
-    c.execute("SELECT * FROM datasets WHERE dataset_id = ? AND account = (SELECT id FROM account WHERE username = ?)", (dataset_id, account,))
+    c.execute("SELECT * FROM datasets WHERE dataset_id = ? AND account_id = (SELECT id FROM account WHERE username = ?)", (dataset_id, account,))
     rows = c.fetchall()
     if len(rows) == 0:
         return False
-    c.execute("DELETE FROM datasets WHERE dataset_id = ? AND account = (SELECT id FROM account WHERE username = ?)", (dataset_id, account,))
+    c.execute("DELETE FROM datasets WHERE dataset_id = ? AND account_id = (SELECT id FROM account WHERE username = ?)", (dataset_id, account,))
     conn.commit()
     conn.close()
     return True
@@ -286,12 +286,12 @@ def rename_dataset(token: str, dataset_id: str, new_name: str) -> bool:
     account = token2account[token]
     conn = sqlite3.connect('db.sqlite3')
     c = conn.cursor()
-    c.execute("SELECT * FROM datasets WHERE dataset_id = ? AND account = (SELECT id FROM account WHERE username = ?)", (dataset_id, account,))
+    c.execute("SELECT * FROM datasets WHERE dataset_id = ? AND account_id = (SELECT id FROM account WHERE username = ?)", (dataset_id, account,))
     rows = c.fetchall()
     if len(rows) == 0:
         return False
     updated_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-    c.execute("UPDATE datasets SET dataset_name = ?, dataset_updated_time = ? WHERE dataset_id = ? AND account = (SELECT id FROM account WHERE username = ?)",
+    c.execute("UPDATE datasets SET dataset_name = ?, dataset_updated_time = ? WHERE dataset_id = ? AND account_id = (SELECT id FROM account WHERE username = ?)",
               (new_name, updated_time, dataset_id, account,))
     conn.commit()
     conn.close()
@@ -340,56 +340,13 @@ def delete_data(token: str, dataset_id: str, data_id: str) -> bool:
     account = token2account[token]
     conn = sqlite3.connect('db.sqlite3')
     c = conn.cursor()
-    c.execute("SELECT * FROM dataset WHERE data_id = ? AND dataset_id = (SELECT id FROM datasets WHERE dataset_id = ? AND account = (SELECT id FROM account WHERE username = ?))",
+    c.execute("SELECT * FROM dataset WHERE data_id = ? AND dataset_id = (SELECT id FROM datasets WHERE dataset_id = ? AND account_id = (SELECT id FROM account WHERE username = ?))",
               (data_id, dataset_id, account,))
     rows = c.fetchall()
     if len(rows) == 0:
         return False
-    c.execute("DELETE FROM dataset WHERE data_id = ? AND dataset_id = (SELECT id FROM datasets WHERE dataset_id = ? AND account = (SELECT id FROM account WHERE username = ?))",
+    c.execute("DELETE FROM dataset WHERE data_id = ? AND dataset_id = (SELECT id FROM datasets WHERE dataset_id = ? AND account_id = (SELECT id FROM account WHERE username = ?))",
               (data_id, dataset_id, account,))
     conn.commit()
     conn.close()
     return True
-
-
-# def json2sqlite():
-#     # data = _load_json("static/data/accounts.json")
-#     accounts = _load_json(
-#         "static\data\\accounts.json")
-#     for username in accounts:
-#         # print(username)
-#         password = accounts[username]
-#         token2account[password] = username
-#         # print(token)
-#         datasets = get_datasets(password)
-#         # print(datasets)
-#         for dataset_id in datasets:
-#             # print(dataset_id)
-#             dataset_name = datasets[dataset_id]["name"]
-#             created_time = datasets[dataset_id]["created_time"]
-#             # updated_time = datasets[dataset_id]["updated_time"]
-#             updated_time = datasets[dataset_id]["updated_time"]
-#             data = get_dataset(token=password, dataset_id=dataset_id)
-#             # print(data)
-#             for data_id in data:
-#                 # print(data_id)
-#                 data_name = data[data_id]["name"]
-#                 # data_created_time = data[data_id]["created_time"]
-#                 data_created_time = data[data_id]["created_time"]
-#                 data_class = data[data_id]["class"]
-#                 data_path = data[data_id]["path"]
-
-#                 print(username, password, dataset_name, created_time,
-#                       updated_time, data_name, data_created_time, data_class, data_path)
-#                 conn = sqlite3.connect('db.sqlite3')
-
-#                 c = conn.cursor()
-#                 # c.execute(f"""insert or replace into home_data (username, token, dataset_name, dataset_created_time, dataset_updated_time, img_name, img_created_time, img_class, img_show) VALUES ('{username}', '{token}', '{dataset_name}', '{created_time}', '{updated_time}', '{data_name}', '{data_created_time}', '{data_class}', '{data_path}');
-#                 # insert or ignore into home_data (username, token, dataset_name, dataset_created_time, dataset_updated_time, img_name, img_created_time, img_class, img_show) VALUES ('{username}', '{token}', '{dataset_name}', '{created_time}', '{updated_time}', '{data_name}', '{data_created_time}', '{data_class}', '{data_path}');
-#                 # IF NOT EXISTS(SELECT * FROM home_data  WHERE ….) THEN INSERT INTO ... ELSE UPDATE SET ...""")
-#                 c.execute(
-#                     f"INSERT OR IGNORE INTO home_data (username, password_md5,dataset_id, dataset_name, dataset_created_time, dataset_updated_time,img_id, img_name, img_created_time, img_class, img_show) VALUES ('{username}', '{password}', '{dataset_id}','{dataset_name}', '{created_time}', '{updated_time}', '{data_id}','{data_name}', '{data_created_time}', '{data_class}', '{data_path}')")
-#                 c.execute(
-#                     "DELETE FROM home_data WHERE rowid NOT IN (SELECT MIN(rowid) FROM home_data GROUP BY img_show, username, dataset_id)")
-#                 conn.commit()
-#                 conn.close()

@@ -51,7 +51,10 @@ def django_login(request):
         if login_form.is_valid():
             cd = login_form.cleaned_data
             token = py_login(cd['username'], cd['password'])
-            return redirect('usr', token=token)
+            if token == '':
+                return HttpResponse("用户名或密码错误")
+            else:
+                return redirect('usr', token=token)
         else:
             return HttpResponse("输入不合法")
     else:
