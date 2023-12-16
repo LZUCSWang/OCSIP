@@ -1,23 +1,44 @@
-    本文件夹为django主体的基于EfficientNet V2模型的卵巢癌亚型识别平台
+#### 本项目为django主体的基于EfficientNet V2模型的卵巢癌亚型识别平台
 
-运行以下命令在本地启动项目
+#### 项目环境
 
-    `python manage.py runserver`
+```
+python = 3.10.4
+```
 
-在服务器启动项目（8000为服务器开放的端口，需要前往控制台设置)
+```
+pip install -r requirements.txt
+```
 
-    `python manage.py runserver 0.0.0.0:8000`
+#### 运行以下命令在本地启动项目
 
-如果有红字提示就先运行（数据库相关）
+    python manage.py runserver
 
-    `python manage.py makemigrations`
+#### 在服务器启动项目（8000为服务器开放的端口，需要前往控制台设置)
 
-    `python manage.py migrate`
+    python manage.py runserver 0.0.0.0:8000
 
-登录后台admin界面
+#### 如果有红字提示就先运行（数据库相关）
 
-    `python manage.py createsuperuser`创建超级用户
+    python manage.py makemigrations
+    
+    python manage.py migrate
 
-    `http://127.0.0.1:8000/admin`登录后台
+#### 登录后台admin界面
 
-    OCSIP目录下的home.html为前端的datashow.html，仅修改了资源调用路径，AI为推理工具，仅修改了PY包名
+##### 创建超级用户
+
+```
+python manage.py createsuperuser
+```
+
+##### 登录后台
+
+```
+http://127.0.0.1:8000/admin
+```
+
+##### 相关仓库
+
+[zpc-dragon/Python-lzu-task: 基于2023秋的Python课设 (github.com)](https://github.com/zpc-dragon/Python-lzu-task)
+
