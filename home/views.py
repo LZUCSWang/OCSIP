@@ -12,9 +12,10 @@ from PY import login as py_login
 token = ''
 dataset_id = ''
 
-
-def usr(request, token):
-    return render(request, 'usr.html', {'token': token, 'username': ftoken2account(token), 'datasets': get_datasets(token)})
+def usr(request, token1):
+    global token
+    token = token1
+    return render(request, 'usr.html', {'token': token1, 'username': ftoken2account(token1), 'datasets': get_datasets(token1)})
 
 
 def django_creat_dataset(request):
