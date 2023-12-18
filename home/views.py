@@ -12,7 +12,6 @@ from PY import login as py_login
 token = ''
 dataset_id = ''
 
-
 def usr(request, token):
     return render(request, 'usr.html', {'token': token, 'username': ftoken2account(token), 'datasets': get_datasets(token)})
 
@@ -22,7 +21,6 @@ def django_creat_dataset(request):
         # 获取提交的数据
         global token
         dataset_name = request.POST.get('dataset_name')
-        print(token, dataset_name)
         dataset_id = creat_dataset(token, dataset_name)
         # 在这里处理你的逻辑，比如保存数据到数据库等
 
@@ -35,6 +33,7 @@ def django_creat_dataset(request):
 
 def home(request):
     global dataset_id
+    global token
     if request.method == "POST":
         dataset_id = request.POST.get('dataset_id')
         dataset_name = get_datasets(token)[dataset_id]['name']
