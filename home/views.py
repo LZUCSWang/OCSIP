@@ -12,6 +12,7 @@ from PY import login as py_login
 token = ''
 dataset_id = ''
 
+
 def usr(request, token):
     return render(request, 'usr.html', {'token': token, 'username': ftoken2account(token), 'datasets': get_datasets(token)})
 
@@ -21,10 +22,11 @@ def django_creat_dataset(request):
         # 获取提交的数据
         global token
         dataset_name = request.POST.get('dataset_name')
+        datasets = get_datasets(token)
+        for dataset_id, dataset_info in datasets.items():
+            if dataset_info['name'] == dataset_name:
+                return HttpResponse('Dataset name already exists')
         dataset_id = creat_dataset(token, dataset_name)
-        # 在这里处理你的逻辑，比如保存数据到数据库等
-
-        # 返回一个简单的响应，你可以根据实际需求进行修改
         # return HttpResponse(f'Token: {token}, Dataset Name: {dataset_name}, dataset_id: {dataset_id},Creat Dataset Success!')
         return render(request, 'usr.html', {'token': token, 'username': ftoken2account(token), 'datasets': get_datasets(token)})
     # 如果是 GET 请求，可以根据实际需求返回一个页面或其他响应
