@@ -129,13 +129,6 @@ token2account = {}
 
 def ftoken2account(token):
     return token2account[token]
-# def freshtoken2account():
-#     global token2account
-#     token2account = {}
-#     accounts = _load_json("static/data/accounts.json")
-#     for username in accounts:
-#         token = accounts[username]
-#         token2account[token] = username
 
 
 @_error("")
