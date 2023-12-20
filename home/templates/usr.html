@@ -120,7 +120,7 @@
         </div>
 
         <h2>Create a New Dataset:</h2>
-        <form method="post" action="{% url 'creat_dataset' %}">
+        <form method="post" action="{% url 'create_dataset' %}">
           {% csrf_token %}
           <input type="text" id="create_dataset_name" name="create_dataset_name" placeholder="Dataset name" required>
           <button type="submit">Create</button>

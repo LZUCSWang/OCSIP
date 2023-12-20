@@ -160,10 +160,11 @@ def django_rename_dataset(request):
             return render(request, 'usr.html', {'dup': 0, 'ren': 2, 'token': global_token, 'username': ftoken2account(global_token), 'datasets': get_datasets(global_token)})
         c.execute("SELECT dataset_id FROM datasets WHERE dataset_name = ? AND account_id = (SELECT id FROM account WHERE username = ?)",
                   (previous_dataset_name, account,))
-        if c.fetchone() == None:
+        try:
+            dataset_id = c.fetchone()[0]
+        except:
             # 原重命名的数据集不存在
             return render(request, 'usr.html', {'dup': 0, 'ren': 1, 'token': global_token, 'username': ftoken2account(global_token), 'datasets': get_datasets(global_token)})
-        dataset_id = c.fetchone()[0]
         conn.close()
         if rename_dataset(global_token, dataset_id, new_dataset_name):
             return render(request, 'usr.html', {'dup': 0, 'ren': 0, 'token': global_token, 'username': ftoken2account(global_token), 'datasets': get_datasets(global_token)})
