@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from home.views import home, django_upload_data, django_login, usr, django_create_dataset, django_delete_data, django_rename_dataset, django_delete_dataset
+from home.views import home, django_upload_data, django_login, usr, django_create_dataset, django_delete_data, django_rename_dataset, django_delete_dataset,django_research_dataset
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("usr/<str:token>", usr, name="usr"),
@@ -27,5 +27,6 @@ urlpatterns = [
     path('delete_data/', django_delete_data, name='delete_data'),
     path('rename_dataset/', django_rename_dataset, name='rename_dataset'),
     path('delete_dataset/', django_delete_dataset, name='delete_dataset'),
+    path('research_dataset/',django_research_dataset,name='research_dataset')
     # path(r'^media/(?P<path>.*)', serve, {"document_root":settings.MEDIA_ROOT}),
 ]

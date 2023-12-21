@@ -31,7 +31,9 @@ def home(request):
         # print(dataset_name)
         return redirect(reverse('home'))
     else:
+        print(global_token, global_dataset_id)
         dataset = json.dumps(get_dataset(global_token, global_dataset_id))
+        print(dataset)
         return render(request, 'home.html', {'dataset': dataset})
 
 
@@ -171,4 +173,19 @@ def django_rename_dataset(request):
         else:
             # 重命名失败
             return render(request, 'usr.html', {'dup': 0, 'ren': 1, 'token': global_token, 'username': ftoken2account(global_token), 'datasets': get_datasets(global_token)})
+    return HttpResponse('Invalid request method')
+
+
+def django_research_dataset(request):
+    if request.method == 'POST':
+        global global_token
+        global global_dataset_id
+        dataset_name = request.POST.get('research_dataset_name')
+        dataset = {}
+        for key, value in get_datasets(global_token).items():
+            if value['name'] == dataset_name:
+                dataset[key] = value
+                break
+        # print(dataset_name)
+        return render(request, 'usr.html', {'token': global_token, 'username': ftoken2account(global_token), 'datasets': dataset})
     return HttpResponse('Invalid request method')

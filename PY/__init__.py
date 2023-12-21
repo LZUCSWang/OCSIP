@@ -212,7 +212,7 @@ def get_dataset(token: str, dataset_id: str) -> Dict[str, Dict[str, int | str]]:
     account = token2account[token]
     conn = sqlite3.connect('db.sqlite3')
     c = conn.cursor()
-    c.execute(f"SELECT * FROM dataset WHERE (Select id FROM datasets WHERE dataset_id = ?) AND (SELECT id FROM datasets WHERE account_id = (SELECT id FROM account WHERE username = ?))", (dataset_id, account,))
+    c.execute(f"SELECT * FROM dataset WHERE dataset_id = (Select id FROM datasets WHERE dataset_id = ?) AND  account_id = (SELECT id FROM account WHERE username = ?)", (dataset_id, account,))
     rows = c.fetchall()
     conn.close()
     data = {}

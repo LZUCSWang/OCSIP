@@ -162,6 +162,15 @@
             document.getElementById("ren").innerText = "The new dataset name already exists!"
           }
         </script>
+        <h2>查找数据集：</h2>
+        <form method="post" action="{% url 'research_dataset' %}">
+          {% csrf_token %}  
+          <input type="text" id="research_dataset_name" name="research_dataset_name" placeholder="数据集名称" required>
+          <button type="submit">查找</button>
+        </form>
+        <p id="rea"></p>
+        <script>
+          </script>
       </div>
     </div>
     <div class="right-content">
