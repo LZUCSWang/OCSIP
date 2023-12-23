@@ -34,21 +34,7 @@ __all__ = ["predict"]
 options = ort.SessionOptions()
 
 
-if False:
-    providers = [
-        (
-            "CANNExecutionProvider",
-            {
-                "device_id": 0,
-                "op_select_impl_mode": "high_performance",
-                "optypelist_for_implmode": "Gelu",
-                "enable_cann_graph": True,
-            },
-        ),
-        "CPUExecutionProvider",
-    ]
-else:
-    providers = ["CPUExecutionProvider"]
+providers = ["CPUExecutionProvider"]
 models = [
     ort.InferenceSession(i, providers=providers)
     for i in glob.glob("static/models/onnx/*.onnx")
@@ -66,7 +52,7 @@ def predict(img):
     # resize to 1024x1024
     img = img.resize((1024, 1024), Image.BILINEAR)
     # normalize mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]
-    img = np.asarray(img).astype(np.float16)
+    img = np.asarray(img).astype(np.float32)
     img = img.transpose(2, 0, 1)
     img = (img - img.mean(2, keepdims=True)) / img.std(2, keepdims=True)
     img = img * np.array([[[0.229]], [[0.224]], [[0.225]]]) + np.array(
