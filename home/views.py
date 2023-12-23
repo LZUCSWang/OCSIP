@@ -31,9 +31,7 @@ def home(request):
         # print(dataset_name)
         return redirect(reverse('home'))
     else:
-        print(global_token, global_dataset_id)
         dataset = json.dumps(get_dataset(global_token, global_dataset_id))
-        print(dataset)
         return render(request, 'home.html', {'dataset': dataset})
 
 
@@ -94,9 +92,19 @@ def django_upload_data(request):
 def django_delete_data(request):
     global global_token
     if request.method == 'POST':
-        data_id = request.POST.get('data_id')
+        # 批量删除版本
+        data_id_seq = request.POST.get('delete_data_id')
+        data_id_list = data_id_seq.split(',')
+        for data_id in data_id_list:
+            if data_id == '' or delete_data(global_token, global_dataset_id, data_id):
+                continue
+            else:
+                HttpResponse('failue')
+        return redirect(reverse('home'))
+        # 单个删除版本
+        data_id = request.POST.get('delete_data_id')
         if delete_data(global_token, global_dataset_id, data_id):
-            HttpResponse('success')
+            return redirect(reverse('home'))
         else:
             HttpResponse('failue')
     pass
@@ -114,8 +122,9 @@ def django_create_dataset(request):
         for dataset_id, dataset_info in datasets.items():
             if dataset_info['name'] == dataset_name:
                 dup = 1
+                break
+        # 在这里处理你的逻辑，比如保存数据到数据库等
         if dup == 0:
-            # 在这里处理你的逻辑，比如保存数据到数据库等
             dataset_id = creat_dataset(global_token, dataset_name)
         # 返回一个简单的响应，你可以根据实际需求进行修改
         return render(request, 'usr.html', {'dup': dup, 'token': global_token, 'username': ftoken2account(global_token), 'datasets': get_datasets(global_token)})
@@ -182,10 +191,14 @@ def django_research_dataset(request):
         global global_dataset_id
         dataset_name = request.POST.get('research_dataset_name')
         dataset = {}
+        print(get_datasets(global_token))
         for key, value in get_datasets(global_token).items():
+            print(value['name'], dataset_name)
             if value['name'] == dataset_name:
                 dataset[key] = value
-                break
+                return render(request, 'usr.html', {'rea': 0, 'token': global_token, 'username': ftoken2account(global_token), 'datasets': dataset})
         # print(dataset_name)
-        return render(request, 'usr.html', {'token': global_token, 'username': ftoken2account(global_token), 'datasets': dataset})
+
+        dataset = get_datasets(global_token)
+        return render(request, 'usr.html', {"rea": 1, 'token': global_token, 'username': ftoken2account(global_token), 'datasets': dataset})
     return HttpResponse('Invalid request method')

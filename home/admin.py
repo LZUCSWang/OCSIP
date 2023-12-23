@@ -30,8 +30,8 @@ class datasetsAdmin(admin.ModelAdmin):
 class datasetAdmin(admin.ModelAdmin):
     list_display = ['data_id', 'data_name', 'data_created_time',
                     'data_class', 'dataset','account', 'data_path']
-    list_filter = ['dataset','data_class']
-    readonly_fields = ('data_path',)  # 必须加这行 否则访问编辑页面会报错
+    list_filter = ['dataset','data_class','account']
+    # readonly_fields = ('data_path',)  # 必须加这行 否则访问编辑页面会报错
     # def data_path(self, obj):
     #     return mark_safe(u'< img src="%s" width="100px" />' % obj.file.url)
     # # def data_path(self, obj):

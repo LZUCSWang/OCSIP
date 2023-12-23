@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Token and Dataset Form</title>
+  <title>用户管理</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -107,59 +107,59 @@
 </head>
 
 <body>
-  <h1>User interface</h1>
+  <h1>用户管理界面</h1>
   <div class="content">
     <div class="left-content">
       <div class="form-container">
-        <h2>Personal information:</h2>
+        <h2>个人信息：</h2>
         <div>
-          <strong>Token:</strong> {{ token }}
+          <strong>令牌：</strong> {{ token }}
         </div>
         <div>
-          <strong>Username:</strong>{{ username }}
+          <strong>用户名：</strong>{{ username }}
         </div>
 
-        <h2>Create a New Dataset:</h2>
+        <h2>创建新数据集：</h2>
         <form method="post" action="{% url 'create_dataset' %}">
           {% csrf_token %}
-          <input type="text" id="create_dataset_name" name="create_dataset_name" placeholder="Dataset name" required>
-          <button type="submit">Create</button>
+          <input type="text" id="create_dataset_name" name="create_dataset_name" placeholder="数据集名称" required>
+          <button type="submit">创建</button>
         </form>
         <p id="duplicate"></p>
         <script>
           var dup = "{{dup}}"
           if (dup == 1) {
-            document.getElementById("duplicate").innerText = "The dataset already exists!"
+            document.getElementById("duplicate").innerText = "该数据集已存在！"
           }
         </script>
-        <h2>Delete a Dataset:</h2>
+        <h2>删除数据集：</h2>
         <form method="post" action="{% url 'delete_dataset' %}">
           {% csrf_token %}
-          <input type="text" id="delete_dataset_name" name="delete_dataset_name" placeholder="Dataset name" required>
-          <button type="submit">Delete</button>
+          <input type="text" id="delete_dataset_name" name="delete_dataset_name" placeholder="数据集名称" required>
+          <button type="submit">删除</button>
         </form>
         <p id="del"></p>
         <script>
           var del = "{{del}}"
           if (del == 1) {
-            document.getElementById("del").innerText = "The dataset doesn't exist!"
+            document.getElementById("del").innerText = "该数据集不存在！"
           }
         </script>
-        <h2>Rename a Dataset:</h2>
+        <h2>重命名数据集：</h2>
         <form method="post" action="{% url 'rename_dataset' %}">
           {% csrf_token %}  
-          <input type="text" id="previous_dataset_name" name="previous_dataset_name" placeholder="previous dataset name" required>
-          <input type="text" id="new_dataset_name" name="new_dataset_name" placeholder="now dataset name" required>
-          <button type="submit">Rename</button>
+          <input type="text" id="previous_dataset_name" name="previous_dataset_name" placeholder="原数据集名称" required>
+          <input type="text" id="new_dataset_name" name="new_dataset_name" placeholder="现数据集名称" required>
+          <button type="submit">重命名</button>
         </form>
         <p id="ren"></p>
         <script>
           var ren = "{{ren}}"
           if (ren == 1) {
-            document.getElementById("ren").innerText = "The dataset doesn't exist!"
+            document.getElementById("ren").innerText = "该数据集不存在！"
           }
           if (ren == 2) {
-            document.getElementById("ren").innerText = "The new dataset name already exists!"
+            document.getElementById("ren").innerText = "新数据集名称已存在！"
           }
         </script>
         <h2>查找数据集：</h2>
@@ -170,22 +170,26 @@
         </form>
         <p id="rea"></p>
         <script>
-          </script>
+          var rea = "{{rea}}"
+          if (rea == 1) {
+            document.getElementById("rea").innerText = "该数据集不存在！"
+          }
+        </script>
       </div>
     </div>
     <div class="right-content">
-      <!-- <h2>Your Datasets:</h2>s -->
+      <!-- <h3>数据集汇总：</h3> -->
       <ul class="dataset-list">
         {% for dataset_id, dataset_info in datasets.items %}
         <li>
-          <strong>Dataset ID:</strong> {{ dataset_id }}<br>
-          <strong>Name:</strong> {{ dataset_info.name }}<br>
-          <strong>Created Time:</strong> {{ dataset_info.created_time }}<br>
-          <strong>Updated Time:</strong> {{ dataset_info.updated_time }}<br>
+          <strong>名称：</strong> {{ dataset_info.name }}<br>
+          <strong>数据集ID：</strong> {{ dataset_id }}<br>
+          <strong>创建时间：</strong> {{ dataset_info.created_time }}<br>
+          <strong>更新时间：</strong> {{ dataset_info.updated_time }}
           <form method="post" action="{% url 'home' %}">
             {% csrf_token %}
             <input type="hidden" id="dataset_id" name="dataset_id" value="{{ dataset_id }}">
-            <button type="submit">Open Dataset</button>
+            <button type="submit" style="float: right;margin-top: -20px;">打开数据集</button>
           </form>
         </li>
         {% endfor %}

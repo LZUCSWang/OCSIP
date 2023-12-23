@@ -21,7 +21,7 @@ pip install -r requirements.txt
 #### 如果有红字提示就先运行（数据库相关）
 
     python manage.py makemigrations
-    
+
     python manage.py migrate
 
 #### 登录后台admin界面
@@ -41,4 +41,3 @@ http://127.0.0.1:8000/admin
 ##### 相关仓库
 
 [zpc-dragon/Python-lzu-task: 基于2023秋的Python课设 (github.com)](https://github.com/zpc-dragon/Python-lzu-task)
-
