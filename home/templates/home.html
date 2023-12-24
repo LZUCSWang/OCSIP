@@ -10,16 +10,52 @@
     <meta name="importmap-type" content="systemjs-importmap">
     <title>数据集详情</title>
     <link rel="shortcut icon" href="https://aip.bdstatic.com/easydl/favicon.ico">
-    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="/static/css/bootstrap.min.css" rel="stylesheet"> -->
 
     <style>
-        .custom-file-upload {
+        .info-box {
+            display: block;
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 200px;
+        }
+
+        /* .custom-file-upload {
             display: inline-block;
-            padding: 10px 20px;
+            padding:0px 20px;
+            padding-bottom: 10px;
             background-color: #f0f0f0;
             border: 1px solid #ccc;
             border-radius: 4px;
             cursor: pointer;
+            text-align: center;
+
+        } */
+        .custom-file-upload {
+            display: inline-block;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .custom-file-upload:hover {
+            background-color: #0056b3;
+            /* 鼠标悬停时的背景色 */
+        }
+
+        .custom-file-upload:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+
         }
 
         /* 隐藏透明的文件选择框 */
@@ -210,13 +246,13 @@
         </div>
     </form> -->
 
-    <form method="post" enctype="multipart/form-data" action="{% url 'add' %}">
+    <h1 style="text-align: center;">数据集详情</h1>
+    <!-- <form method="post" enctype="multipart/form-data" action="{% url 'add' %}">
         {% csrf_token %}
         <div class="form-group">
-            <!-- <label for="icon_input">图像</label> -->
-            <!-- <input name="img" type="file" id="icon_input" accept="image/*"> -->
+            <label for="icon_input">图像</label>
+            <input name="img" type="file" id="icon_input" accept="image/*">
         </div>
-        <h1 style="text-align: center;">数据集详情</h1>
         <label for="file-input" class="custom-file-upload">导入</label>
         <input name="img" type="file" id="file-input" accept="image/*">
         <script type="text/javascript">
@@ -229,7 +265,8 @@
                         img.src = e.target.result;
                         var info = document.createElement("span");
                         info.textContent = "文件名: " + file.name + "\n大小: " + file.size + " bytes";
-                        alert("导入成功\n" + info.textContent)
+                        // alert("导入成功\n" + info.textContent)
+
 
                     };
                     reader.readAsDataURL(file);
@@ -238,11 +275,11 @@
                 }
             };
         </script>
-        <button type="submit" class="btn btn-primary" style="margin-right: 20px;float: right;">上传</button>
+        <button type="submit" class="btn btn-primary" style="margin-right: 20px;float: right;display: none;">上传</button>
         <div id="loading" class="loader">
             <h5 style='text-align: center;color: aqua;'>请稍后……</h5>
             <div class=".section">
-                <!-- <div class="box" </div> -->
+                <div class="box" </div>
                 <div class="box-circle"></div>
                 <div class="box-circle1"></div>
                 <div class="box-circle2"></div>
@@ -271,7 +308,7 @@
 
         </script>
 
-    </form>
+    </form> -->
     <div data-v-77e9b1ec="" class="wh-append vue-portal-target">
     </div>
 
@@ -324,7 +361,68 @@
                                         <div data-v-59643587="" class="s-tab">MC</div>
 
                                         <div class="indicator" style="width: 35px;transform: translateX(0px);"></div>
+                                        <form method="post" enctype="multipart/form-data" action="{% url 'add' %}">
+                                            {% csrf_token %}
 
+                                            <div style="height: 45px;width: 80px;float: right;">
+                                                <label for="file-input" class="custom-file-upload">导入</label>
+                                            </div>
+                                            <input name="img" type="file" id="file-input" accept="image/*">
+                                            <script type="text/javascript">
+                                                document.getElementById('file-input').onchange = function () {
+                                                    if (this.value) {
+                                                        var file = this.files[0];
+                                                        var reader = new FileReader();
+                                                        reader.onload = function (e) {
+                                                            var img = document.createElement("img");
+                                                            img.src = e.target.result;
+                                                            var info = document.createElement("span");
+                                                            info.textContent = "文件名: " + file.name + "\n大小: " + file.size + " bytes";
+                                                            document.getElementById('upload-btn').click();
+                                                            console.log("导入成功\n" + info.textContent)
+
+                                                        };
+                                                        reader.readAsDataURL(file);
+                                                    } else {
+                                                        alert('导入失败!');
+                                                    }
+                                                };
+                                            </script>
+                                            <button type="submit" class="btn btn-primary" id="upload-btn"
+                                                style="margin-right: 20px;float: right;display: none;">上传</button>
+                                            <div id="loading" class="loader">
+                                                <h5 style='text-align: center;color: aqua;'>请稍后……</h5>
+                                                <div class=".section">
+                                                    <!-- <div class="box" </div> -->
+                                                    <div class="box-circle"></div>
+                                                    <div class="box-circle1"></div>
+                                                    <div class="box-circle2"></div>
+                                                </div>
+                                                <div style="height: 600px;"></div>
+                                            </div>
+
+                                            <script>
+                                                document.addEventListener("DOMContentLoaded", function () {
+                                                    var submitButton = document.querySelector(".btn-primary");
+                                                    var loadingElement = document.getElementById("loading");
+
+                                                    submitButton.addEventListener("click", function (event) {
+                                                        // 阻止按钮的默认提交行为
+                                                        event.preventDefault();
+                                                        // 显示加载动画
+                                                        loadingElement.style.display = '';
+                                                        // 提交表单
+                                                        submitButton.closest("form").submit();
+                                                    });
+                                                });
+                                                window.addEventListener("load", function () {
+                                                    var loader = document.getElementById("loading");
+                                                    loader.style.display = "none";
+                                                });
+
+                                            </script>
+
+                                        </form>
                                         <script>
 
                                             // 获取标签组元素和指示器元素
@@ -397,6 +495,7 @@
                                         </script>
                                     </div>
                                 </div>
+
 
 
                                 <div data-v-59643587="" class="entity-flex-wrap">
@@ -884,7 +983,7 @@
                                 <p style="margin-top:20px"><strong>文件名:</strong> ${params.name}</p>
                                 <p><strong>类别:</strong> ${params.class}</p>
                                 <p><strong>创建时间:</strong> ${params.created_time}</p>
-                                <p style= 'white-space: pre-wrap;word-break: break-all;'><strong >路径:</strong> /${params.path}</p>
+                                <p style= 'white-space: pre-wrap;word-break: break-all;'><strong >存储路径:</strong> /${params.path}</p>
                                 </div>
                                 `;
                         };
@@ -906,23 +1005,48 @@
                                 html2 = generateHTML2(info)
                                 labelPickerItemsContent.innerHTML = html2;
                             });
-                        });
-                        // 修改成动态绑定事件
-                        // document.addEventListener('click', function (event) {
-                        //     if (event.target.tagName === 'IMG') {
-                        //         var id = event.target.getAttribute('data_id');
-                        //         var info = myDict[id];
-                        //         var labelPickerItemsHead = document.querySelector('.label-picker_items_head');
-                        //         labelPickerItemsHead.innerHTML = '';
-                        //         var labelTitle = document.querySelector('.label-title');
-                        //         labelTitle.textContent = '图片信息'
-                        //         var labelPickerItemsContent = document.querySelector('.label-picker_items_content');
-                        //         labelPickerItemsContent.innerHTML = '';
-                        //         html2 = generateHTML2(info)
-                        //         labelPickerItemsContent.innerHTML = html2;
-                        //     }
-                        // });
+                            item.addEventListener('mouseover', function () {
+                                var id = item.getAttribute('data_id');
+                                var info = myDict[id];
+                                var infoBox = createInfoBox(info, item);
+                                item.parentNode.appendChild(infoBox);
+                                item.style.cursor = "pointer";
+                            });
 
+                            item.addEventListener('mouseout', function () {
+                                var infoBox = item.parentNode.querySelector('.info-box');
+                                if (infoBox) {
+                                    infoBox.parentNode.removeChild(infoBox);
+                                }
+                            });
+                        });
+
+                        function createInfoBox(info, item) {
+                            var infoBox = document.createElement('div');
+                            infoBox.className = 'info-box';
+                            infoBox.innerHTML = generateHTML3(info);
+
+                            // 设置信息框位置
+                            var rect = item.getBoundingClientRect();
+
+
+
+                            return infoBox;
+                        }
+                        function generateHTML3(info) {
+                            // 生成信息展示框的HTML代码
+                            // 根据你的需求自定义生成的HTML结构
+                            var html = '<ul>';
+                            key = 'name';
+                            html += '<li>' + key + ': ' + info[key] + '</li>';
+                            key = 'class';
+                            html += '<li>' + key + ': ' + info[key] + '(' + classmap[info[key]] + ')</li>';
+                            key = 'created_time';
+                            html += '<li>' + key + ': ' + info[key] + '</li>';
+
+                            html += '</ul>';
+                            return html;
+                        }
 
 
                     </script>
