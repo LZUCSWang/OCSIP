@@ -6,7 +6,7 @@
 
 ![user](pic\user.jpg)
 
-![image-20231224115315297](pic\dataset_main_.png)
+![image-20231224115315297](.\pic\dataset_main_.png)
 
 ##### 登录页面
 
