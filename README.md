@@ -2,7 +2,7 @@
 
 ##### 三个页面
 
-![image-20231223163045561](pic\login.jpg)
+![image-20231223163045561](https://github.com/LZUCSWang/OCSIP/blob/main/pic/login.jpg)
 
 ![user](pic\user.jpg)
 
