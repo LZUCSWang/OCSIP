@@ -4,9 +4,9 @@
 
 ![image-20231223163045561](https://github.com/LZUCSWang/OCSIP/blob/main/pic/login.jpg)
 
-![user](pic\user.jpg)
+![user](https://github.com/LZUCSWang/OCSIP/blob/main/pic/user.jpg)
 
-![image-20231224115315297](.\pic\dataset_main_.png)
+![image-20231224115315297](https://github.com/LZUCSWang/OCSIP/blob/main/pic/dataset_main_.png)
 
 ##### 登录页面
 
