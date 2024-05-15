@@ -42,7 +42,7 @@
 
   ![user_delete_test1](https://github.com/LZUCSWang/OCSIP/blob/main/pic/user_delete_test1.jpg)
 
-  ![image-20231223165236912](D:\OCSIP\doc\https://github.com/LZUCSWang/OCSIP/blob/main/pic/user_dataset_notfound.png)
+  ![image-20231223165236912](https://github.com/LZUCSWang/OCSIP/blob/main/pic/user_dataset_notfound.png)
 
 - 重命名数据集可根据输入的数据集名称检索并重命名为新的数据集名称，如果要被重命名的数据集名称不存在或要重命名的数据集新名称已存在均会提示
 
